@@ -19,9 +19,14 @@ namespace Simplisticky {
         private SecureString secureEmail, securePassword;
         private String encryptedEmail, encryptedPassword;
 
-        public MainWindow() {
+        public MainWindow(int tab, bool show) {
             InitializeComponent();
-            ApplicationController app = new ApplicationController();
+            if (!show)
+                this.Hide();
+            else {
+                this.MainWindowTabControl.SelectedTab = this.MainWindowTabControl.TabPages[tab];
+                this.Show();
+            }
 /*            init = new Initialize(this.MainWindowTabControl, this.emailField, this.passwordField);
             cred = new SecureCredential(); */
         }
@@ -60,10 +65,10 @@ namespace Simplisticky {
                     
                     foreach (Note n in notelist) {
                         myHT.Add(n.Key, n);
-                        StickyNote sticky = new StickyNote();
+           //              StickyNote sticky = new StickyNote();
            //             storedNotes.xmlWrite(n, sticky);
-                        sticky.Content = n.Content;
-                        sticky.Show();
+           //             sticky.Content = n.Content;
+           //             sticky.Show();
                     }
              //       storedNotes.xmlRead();
                 } catch (Exception error) {
@@ -87,7 +92,51 @@ namespace Simplisticky {
 
         }
 
+        private void quitButton_Click(object sender, EventArgs e) {
+            // Modify
+            Application.Exit();
+        }
 
-        
+        private void closeToTaskbar_Click(object sender, EventArgs e) {
+            Properties.Settings.Default.showmain = false;
+            Properties.Settings.Default.Save();
+            this.Hide();
+        }
+
+        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e) {
+            this.Show();
+            Properties.Settings.Default.showmain = true;
+            Properties.Settings.Default.Save();
+        }
+
+        private void sysTrayQuit_Click(object sender, EventArgs e) {
+            // Modify
+            Application.Exit();
+        }
+
+        private void sysTrayShowNotelist_Click(object sender, EventArgs e) {
+            
+            System.Console.WriteLine("notelist clicked");
+            this.MainWindowTabControl.SelectedTab = this.MainWindowTabControl.TabPages[0];
+            this.Show();
+            Properties.Settings.Default.showmain = true;
+            Properties.Settings.Default.Save();
+            
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e) {
+            FormClosing(this,e);
+        }
+
+        private void FormClosing(object sender,FormClosingEventArgs e) {
+
+            if (e.CloseReason == CloseReason.UserClosing && ((!sender.Equals(sysTrayQuit) && !sender.Equals(quitButton)) || sender.Equals(this))) {
+                e.Cancel = true;
+                this.Hide();
+            }
+            else
+                Application.Exit();
+        }
+
     }
 }

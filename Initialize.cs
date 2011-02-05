@@ -28,11 +28,15 @@ namespace Simplisticky {
 
             if (Properties.Settings.Default.firstrun == true) {
                 // If this is the first time ever the application is being launched.
-                
+                Properties.Settings.Default.firstrun = false;
+                Properties.Settings.Default.Save();
+                app.Main = new MainWindow(2,true);
+
                 loadLocalContent();
             }
             else {
                 // Read locally stored XML file and fill notelist Array
+                app.Main = new MainWindow(0, Properties.Settings.Default.showmain);
                 loadLocalContent();
 
             }

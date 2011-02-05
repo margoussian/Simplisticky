@@ -13,7 +13,7 @@ namespace Simplisticky {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new StickyNote());
-            Application.Run(new MainWindow());
+            Application.Run(new ApplicationController());
         }
     }
 }

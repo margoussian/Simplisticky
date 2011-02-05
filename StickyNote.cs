@@ -42,7 +42,7 @@ namespace Simplisticky {
 
         // Need to clean up everything below this comment line
 
-        public StickyNote() {
+/*        public StickyNote() {
             noteCollection = new ArrayList();
             noteCollection.Add(this);
             
@@ -56,7 +56,7 @@ namespace Simplisticky {
             
             InitializeComponent();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
-        }
+        } */
 
         public string Content {
             get {
@@ -105,8 +105,8 @@ namespace Simplisticky {
         }
 
         private void AddNoteButton_Click(object sender, MouseEventArgs e) {
-            StickyNote newNote = new StickyNote(noteCollection);
-            newNote.Show();
+     /*       StickyNote newNote = new StickyNote(noteCollection);
+            newNote.Show(); */
         }
 
         private void AddNoteButton_MouseLeave(object sender, EventArgs e) {
