@@ -1,0 +1,1 @@
+A simple sticky note application with interfaces with the simplenoteapp.com api
