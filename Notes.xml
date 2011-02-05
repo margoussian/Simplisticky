@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<notelist>
+  <note>
+    <key>1</key>
+    <show>1</show>
+    <created>today</created>
+    <modified>today</modified>
+    <text>Testing 1 , 2, 3</text>
+    <topleft>50, 50</topleft>
+    <width>200</width>
+    <height>100</height>
+    <font>1</font>
+    <color>1</color>
+  </note>
+  <note>
+    <key>2</key>
+    <show>1</show>
+    <created>today</created>
+    <modified>today</modified>
+    <text>Testing 456</text>
+    <topleft>500, 50</topleft>
+    <width>100</width>
+    <height>150</height>
+    <font>1</font>
+    <color>1</color>
+  </note>
+</notelist>
