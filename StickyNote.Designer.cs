@@ -266,7 +266,7 @@
             this.dragIconLabel.AutoSize = true;
             this.dragIconLabel.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.dragIconLabel.Image = global::Simplisticky.Properties.Resources.drag;
-            this.dragIconLabel.Location = new System.Drawing.Point(188, 189);
+            this.dragIconLabel.Location = new System.Drawing.Point(188, 162);
             this.dragIconLabel.MaximumSize = new System.Drawing.Size(8, 8);
             this.dragIconLabel.MinimumSize = new System.Drawing.Size(8, 8);
             this.dragIconLabel.Name = "dragIconLabel";
@@ -287,7 +287,7 @@
             this.NoteTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.NoteTextBox.Multiline = true;
             this.NoteTextBox.Name = "NoteTextBox";
-            this.NoteTextBox.Size = new System.Drawing.Size(174, 135);
+            this.NoteTextBox.Size = new System.Drawing.Size(174, 119);
             this.NoteTextBox.TabIndex = 0;
             this.NoteTextBox.TextChanged += new System.EventHandler(this.NoteTextBox_TextChanged);
             // 
@@ -296,7 +296,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
-            this.ClientSize = new System.Drawing.Size(200, 200);
+            this.ClientSize = new System.Drawing.Size(200, 173);
             this.ControlBox = false;
             this.Controls.Add(this.ToolBarPanel);
             this.Controls.Add(this.dragIconLabel);

@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace Simplisticky {
-    class ApplicationController : ApplicationContext {
+    public class ApplicationController : ApplicationContext {
 
         private List<StickyNote> notelist;
         private XmlController xml;
@@ -19,6 +19,8 @@ namespace Simplisticky {
             init = new Initialize(this);
             init.begin();
         }
+
+        #region Accessors
 
         // Accessors
 
@@ -48,6 +50,8 @@ namespace Simplisticky {
                 xml = value;
             }
         }
+
+        #endregion
 
     }
 }

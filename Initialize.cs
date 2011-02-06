@@ -13,11 +13,8 @@ using System.Windows.Forms;
 namespace Simplisticky {
     class Initialize {
 
-        private int first_run;
         private ApplicationController app;
         private XmlController xml;
-        private SecureCredential cred;
-        System.Windows.Forms.TabControl MainWindowTabControl;   // Pointer to main window tab controller
 
         public Initialize(ApplicationController _app) {
             app = _app;
@@ -30,13 +27,13 @@ namespace Simplisticky {
                 // If this is the first time ever the application is being launched.
                 Properties.Settings.Default.firstrun = false;
                 Properties.Settings.Default.Save();
-                app.Main = new MainWindow(2,true);
+                app.Main = new MainWindow(2,true,app);
 
                 loadLocalContent();
             }
             else {
                 // Read locally stored XML file and fill notelist Array
-                app.Main = new MainWindow(0, Properties.Settings.Default.showmain);
+                app.Main = new MainWindow(0, Properties.Settings.Default.showmain, app);
                 loadLocalContent();
 
             }

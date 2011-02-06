@@ -27,7 +27,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.MainWindowTabControl = new System.Windows.Forms.TabControl();
             this.NoteListTab = new System.Windows.Forms.TabPage();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.NotesTabDescLabel = new System.Windows.Forms.Label();
             this.SettingsTab = new System.Windows.Forms.TabPage();
             this.LoginCredentialsTab = new System.Windows.Forms.TabPage();
@@ -38,19 +37,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.emailField = new System.Windows.Forms.TextBox();
             this.passwordField = new System.Windows.Forms.TextBox();
-            this.noteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.quitButton = new System.Windows.Forms.Button();
             this.closeToTaskbar = new System.Windows.Forms.Button();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.sysTrayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sysTrayShowNotelist = new System.Windows.Forms.ToolStripMenuItem();
-            this.sysTrayQuit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.sysTrayQuit = new System.Windows.Forms.ToolStripMenuItem();
             this.MainWindowTabControl.SuspendLayout();
             this.NoteListTab.SuspendLayout();
             this.LoginCredentialsTab.SuspendLayout();
             this.CredentialsBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.noteBindingSource)).BeginInit();
             this.sysTrayContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +66,6 @@
             // NoteListTab
             // 
             this.NoteListTab.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.NoteListTab.Controls.Add(this.listBox1);
             this.NoteListTab.Controls.Add(this.NotesTabDescLabel);
             this.NoteListTab.Location = new System.Drawing.Point(4, 24);
             this.NoteListTab.Name = "NoteListTab";
@@ -77,17 +73,6 @@
             this.NoteListTab.Size = new System.Drawing.Size(286, 384);
             this.NoteListTab.TabIndex = 0;
             this.NoteListTab.Text = "Notes";
-            // 
-            // listBox1
-            // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(3, 62);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(280, 319);
-            this.listBox1.TabIndex = 2;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // NotesTabDescLabel
             // 
@@ -192,10 +177,6 @@
             this.passwordField.TabIndex = 1;
             this.passwordField.UseSystemPasswordChar = true;
             // 
-            // noteBindingSource
-            // 
-            this.noteBindingSource.DataSource = typeof(Sharpnote.Note);
-            // 
             // quitButton
             // 
             this.quitButton.Location = new System.Drawing.Point(231, 429);
@@ -240,17 +221,17 @@
             this.sysTrayShowNotelist.Text = "Note List";
             this.sysTrayShowNotelist.Click += new System.EventHandler(this.sysTrayShowNotelist_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
+            // 
             // sysTrayQuit
             // 
             this.sysTrayQuit.Name = "sysTrayQuit";
             this.sysTrayQuit.Size = new System.Drawing.Size(164, 22);
             this.sysTrayQuit.Text = "Quit SimpliSticky";
             this.sysTrayQuit.Click += new System.EventHandler(this.sysTrayQuit_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
             // 
             // MainWindow
             // 
@@ -267,14 +248,15 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(324, 464);
             this.Name = "MainWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SimpleStickyNotes";
+            this.ResizeEnd += new System.EventHandler(this.MainWindowMoved);
             this.MainWindowTabControl.ResumeLayout(false);
             this.NoteListTab.ResumeLayout(false);
             this.LoginCredentialsTab.ResumeLayout(false);
             this.LoginCredentialsTab.PerformLayout();
             this.CredentialsBox.ResumeLayout(false);
             this.CredentialsBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.noteBindingSource)).EndInit();
             this.sysTrayContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -294,8 +276,6 @@
         private System.Windows.Forms.TextBox passwordField;
         private System.Windows.Forms.Label syncStatusMessage;
         private System.Windows.Forms.Button syncButton;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.BindingSource noteBindingSource;
         private System.Windows.Forms.Button quitButton;
         private System.Windows.Forms.Button closeToTaskbar;
         private System.Windows.Forms.NotifyIcon notifyIcon;

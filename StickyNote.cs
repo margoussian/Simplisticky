@@ -12,53 +12,76 @@ using Sharpnote;
 
 namespace Simplisticky {
     public partial class StickyNote : Form {
-        public ArrayList noteCollection;
+
+        private ApplicationController app;
         private String key, created, modified;
+        private int show, font, color;
+        private int newX, newY, newCount = 1;
+        
         private const int CS_DROPSHADOW = 0x20000;
         DateTime current;
 
+        #region constructors
 
         public StickyNote(String _key, String _created, String _modified, String _text,
                           int _show, int _width, int _height, int _font, int _color,
-                          Point _p) {
+                          Point _p, ApplicationController _app) {
             InitializeComponent();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
 
+            app = _app;
             key = _key;
             this.NoteTextBox.Text = _text;
             created = _created;
             modified = _modified;
             this.Width = _width;
             this.Height = _height;
-            
             this.Location = _p;
-            
 
 //            setFont();
 //            setColor();
         }
 
+        public StickyNote(ApplicationController _app) {
 
-
-        // Need to clean up everything below this comment line
-
-/*        public StickyNote() {
-            noteCollection = new ArrayList();
-            noteCollection.Add(this);
-            
             InitializeComponent();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
+            app = _app;
         }
 
-        public StickyNote(ArrayList _noteCollection) {
-            noteCollection = _noteCollection;
-            noteCollection.Add(this);
-            
-            InitializeComponent();
-            this.SetStyle(ControlStyles.ResizeRedraw, true);
-        } */
+        #endregion
 
-        public string Content {
+        #region ButtonEvents
+
+        private void AddNoteButton_Click(object sender, MouseEventArgs e) {
+            StickyNote newNote = new StickyNote(app);
+            newX = this.Location.X + this.Width + (newCount * 20);
+            newY = this.Location.Y + ((newCount-1) * 20);
+            newCount++;
+            newNote.Location = new Point(newX, newY);
+            app.Notelist.Add(newNote);
+            System.Console.WriteLine(app.Notelist.Count);
+            newNote.Show();
+        }
+
+        #endregion
+
+        
+
+        #region Accessors
+
+        // Accessors
+
+        public String Key {
+            get {
+                return key;
+            }
+            set {
+                key = value;
+            }
+        }
+
+        public String Content {
             get {
                 return NoteTextBox.Text;
             }
@@ -66,6 +89,55 @@ namespace Simplisticky {
                 NoteTextBox.Text = value;
             }
         }
+
+        public int NoteShow {
+            get {
+                return show;
+            }
+            set {
+                show = value;
+            }
+        }
+
+        public String NoteCreated {
+            get {
+                return created;
+            }
+            set {
+                created = value;
+            }
+        }
+
+        public String Modified {
+            get {
+                return modified;
+            }
+            set {
+                modified = value;
+            }
+        }
+
+        public int NoteFont {
+            get {
+                return font;
+            }
+            set {
+                font = value;
+            }
+        }
+
+        public int NoteColor {
+            get {
+                return color;
+            }
+            set {
+                color = value;
+            }
+        }
+
+        #endregion
+
+        // Need to clean up everything below this comment line
 
         Point lastClick;
 
@@ -104,10 +176,7 @@ namespace Simplisticky {
             lastClick = new Point(e.X, e.Y); //We'll need this for when the Form starts to move
         }
 
-        private void AddNoteButton_Click(object sender, MouseEventArgs e) {
-     /*       StickyNote newNote = new StickyNote(noteCollection);
-            newNote.Show(); */
-        }
+
 
         private void AddNoteButton_MouseLeave(object sender, EventArgs e) {
             AddNoteButton.ForeColor = Color.DimGray;

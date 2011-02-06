@@ -9,7 +9,7 @@ using System.Configuration;
 using System.Drawing;
 
 namespace Simplisticky {
-    class XmlController {
+    public class XmlController {
         private String document = "Notes.xml";
         private XmlDocument myxmlDocument;
         private XmlTextReader xmlReader;
@@ -30,11 +30,7 @@ namespace Simplisticky {
 
             try {
                 myxmlDocument = new XmlDocument();
-                myxmlDocument.Load(document);
-                xmlReader = new XmlTextReader(document);
-                if (xmlReader == null) {
-                    // create new XML file here
-                }
+
 
             }
             catch (Exception e) {
@@ -46,6 +42,11 @@ namespace Simplisticky {
          public void Read(List<StickyNote> notelist) {
 
             try {
+                myxmlDocument.Load(document);
+                xmlReader = new XmlTextReader(document);
+                if (xmlReader == null) {
+                    // create new XML file here
+                }
                 while (xmlReader.Read()) {
                     switch (xmlReader.NodeType) {
                         case XmlNodeType.Element: // The node is an element.
@@ -65,7 +66,8 @@ namespace Simplisticky {
                                 show = Convert.ToInt32(xmlReader.ReadString());
                             }
                             if (xmlReader.Name == "topleft") {
-                                topleft = Parse<Point>(xmlReader.ReadString());
+                                String[] temp = xmlReader.ReadString().Split(new char[] {','});
+                                topleft = new Point(Convert.ToInt32(temp[0]), Convert.ToInt32(temp[1]));
                             }
                             if (xmlReader.Name == "width") {
                                 width = Convert.ToInt32(xmlReader.ReadString());
@@ -80,69 +82,83 @@ namespace Simplisticky {
                                 color = Convert.ToInt32(xmlReader.ReadString());
                             }
                             break;
-                      /*  case XmlNodeType.Text: 
-                            Console.WriteLine(xmlReader.Value);
-                            break; */
                         case XmlNodeType.EndElement:
 
                             if (xmlReader.Name == "note") { // Create a new Stickynote and insert it into the notelist
-
-                                System.Console.WriteLine(key + " " + created + " " + modified + " " + text + " " + show + " " + width + " " + height + " " + font + " " + color + " " + topleft);
-                                note = new StickyNote(key,created,modified,text,show,width,height,font,color,topleft);
-                                
-                                
+                                note = new StickyNote(key,created,modified,text,show,width,height,font,color,topleft,app);
                                 app.Notelist.Add(note);
                                 note.Show();
-                                
                             }
                             break;
                     }
                 }
-                System.Console.WriteLine(app.Notelist.Count);
+                xmlReader.Close();
             }
             catch (Exception e) {
-                System.Console.WriteLine("ERROR in Read: " + e.Message);
+                System.Console.WriteLine("ERROR in XMLREAD: " + e.Message);
             }
         }
 
-         static T Parse<T>(string text) {
-
-             // might need ConvertFromString
-
-             // (rather than Invariant)
-
-             return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromInvariantString(text);
-
-         }
-
-        public void Write(Note n, StickyNote sn) {
+        public void Write(List<StickyNote> notelist) {
             try {
 
                 xmlWriter = new XmlTextWriter(document, null);
-
                 xmlWriter.WriteStartDocument();
-                xmlWriter.WriteStartElement("note");
+                xmlWriter.WriteStartElement("notelist");
 
-                xmlWriter.WriteStartElement("key", "");
-                xmlWriter.WriteString(n.Key);
-                xmlWriter.WriteEndElement();
+                foreach (StickyNote note in app.Notelist) {
 
-                xmlWriter.WriteStartElement("content", "");
-                xmlWriter.WriteString(n.Content);
-                xmlWriter.WriteEndElement();
+                    xmlWriter.WriteStartElement("note");
 
-                xmlWriter.WriteStartElement("created", "");
-                System.Console.WriteLine("modified:" + n.Created.ToString());
-                xmlWriter.WriteString(n.Created.ToString());
-                xmlWriter.WriteEndElement();
+                    xmlWriter.WriteStartElement("key", "");
+                    xmlWriter.WriteString(note.Key);
+                    xmlWriter.WriteEndElement();
 
+                    xmlWriter.WriteStartElement("show", "");
+                    xmlWriter.WriteString(Convert.ToString(note.NoteShow));
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteStartElement("created", "");
+                    xmlWriter.WriteString(note.NoteCreated);
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteStartElement("modified", "");
+                    xmlWriter.WriteString(note.Modified);
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteStartElement("text", "");
+                    xmlWriter.WriteString(note.Content);
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteStartElement("topleft", "");
+                    xmlWriter.WriteString(Convert.ToString(note.Location.X)+","+Convert.ToString(note.Location.Y));
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteStartElement("width", "");
+                    xmlWriter.WriteString(Convert.ToString(note.Width));
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteStartElement("height", "");
+                    xmlWriter.WriteString(Convert.ToString(note.Height));
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteStartElement("font", "");
+                    xmlWriter.WriteString(Convert.ToString(note.NoteFont));
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteStartElement("color", "");
+                    xmlWriter.WriteString(Convert.ToString(note.NoteColor));
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteEndElement();
+                }
                 xmlWriter.WriteEndElement();
                 xmlWriter.WriteEndDocument();
 
                 xmlWriter.Close();
             }
             catch (Exception e) {
-                System.Console.WriteLine("ERROR in Write: " + e.Message);
+                System.Console.WriteLine("ERROR in XMLWRITE: " + e.Message);
             }
         }
     }

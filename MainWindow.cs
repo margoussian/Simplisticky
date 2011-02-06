@@ -13,23 +13,52 @@ using Sharpnote;
 
 namespace Simplisticky {
     public partial class MainWindow : Form {
-        
-        private Initialize init;
+
+        private ApplicationController app;
         private SecureCredential cred;
         private SecureString secureEmail, securePassword;
         private String encryptedEmail, encryptedPassword;
 
-        public MainWindow(int tab, bool show) {
+        public MainWindow(int tab, bool show, ApplicationController _app) {
             InitializeComponent();
+            app = _app;
+            this.Location = Properties.Settings.Default.mainLocation;
             if (!show)
                 this.Hide();
             else {
                 this.MainWindowTabControl.SelectedTab = this.MainWindowTabControl.TabPages[tab];
                 this.Show();
             }
-/*            init = new Initialize(this.MainWindowTabControl, this.emailField, this.passwordField);
-            cred = new SecureCredential(); */
+            cred = new SecureCredential();
         }
+
+        #region buttonClickEvents
+
+        private void closeToTaskbar_Click(object sender, EventArgs e) {
+            Properties.Settings.Default.showmain = false;
+            Properties.Settings.Default.Save();
+            this.Hide();
+        }
+
+        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e) {
+            this.Show();
+            Properties.Settings.Default.showmain = true;
+            Properties.Settings.Default.Save();
+        }
+
+        private void sysTrayQuit_Click(object sender, EventArgs e) {
+            app.Xml.Write(app.Notelist);
+            Application.Exit();
+        }
+
+        private void quitButton_Click(object sender, EventArgs e) {
+            app.Xml.Write(app.Notelist);
+            Application.Exit();
+        }
+
+        #endregion
+
+        // Clean up everything below this line
 
         private void syncButton_Click(object sender, EventArgs e) {
             if (emailField.Text == "" || passwordField.Text == "") {
@@ -59,8 +88,8 @@ namespace Simplisticky {
 
                     List<Note> notelist = notes.Item1.ToList();
                     
-                    listBox1.DataSource = notelist;
-                    listBox1.DisplayMember = "Content";
+    //                    listBox1.DataSource = notelist;
+      //              listBox1.DisplayMember = "Content";
                     Hashtable myHT = new Hashtable();
                     
                     foreach (Note n in notelist) {
@@ -92,36 +121,18 @@ namespace Simplisticky {
 
         }
 
-        private void quitButton_Click(object sender, EventArgs e) {
-            // Modify
-            Application.Exit();
-        }
 
-        private void closeToTaskbar_Click(object sender, EventArgs e) {
-            Properties.Settings.Default.showmain = false;
-            Properties.Settings.Default.Save();
-            this.Hide();
-        }
-
-        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e) {
-            this.Show();
-            Properties.Settings.Default.showmain = true;
-            Properties.Settings.Default.Save();
-        }
-
-        private void sysTrayQuit_Click(object sender, EventArgs e) {
-            // Modify
-            Application.Exit();
-        }
 
         private void sysTrayShowNotelist_Click(object sender, EventArgs e) {
-            
-            System.Console.WriteLine("notelist clicked");
             this.MainWindowTabControl.SelectedTab = this.MainWindowTabControl.TabPages[0];
             this.Show();
             Properties.Settings.Default.showmain = true;
             Properties.Settings.Default.Save();
-            
+        }
+
+        private void MainWindowMoved(object sender, EventArgs e) {
+            Properties.Settings.Default.mainLocation = this.Location;
+            Properties.Settings.Default.Save();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e) {
@@ -134,8 +145,10 @@ namespace Simplisticky {
                 e.Cancel = true;
                 this.Hide();
             }
-            else
+            else {
+                app.Xml.Write(app.Notelist);
                 Application.Exit();
+            }
         }
 
     }
