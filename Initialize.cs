@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 using System.Windows.Forms;
+using System.Drawing;
 
 /* This class performs required initilization of note data 
  * on application startup. It also reads and sets proper
@@ -29,12 +30,23 @@ namespace Simplisticky {
                 Properties.Settings.Default.Save();
                 app.Main = new MainWindow(2,true,app);
 
-                loadLocalContent();
+                if (app.Notelist.Count == 0) {  // Nothing stored in XML File
+                    StickyNote note = new StickyNote(app);
+                    app.Notelist.Add(note);
+                    note.Location = new Point(50, 50);
+                    note.Show();
+                }
             }
             else {
                 // Read locally stored XML file and fill notelist Array
                 app.Main = new MainWindow(0, Properties.Settings.Default.showmain, app);
                 loadLocalContent();
+                if (app.Notelist.Count == 0) {  // Nothing stored in XML File
+                    StickyNote note = new StickyNote(app);
+                    app.Notelist.Add(note);
+                    note.Location = new Point(50, 50);
+                    note.Show();
+                }
 
             }
         }

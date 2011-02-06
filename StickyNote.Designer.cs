@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StickyNote));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -34,20 +35,19 @@
             this.calibriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sergoUIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.segioScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.noTimesNewRomandFaggotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolBarPanel = new System.Windows.Forms.Panel();
+            this.lastUpdatedField = new System.Windows.Forms.Label();
+            this.NoteTextBox = new System.Windows.Forms.TextBox();
+            this.AddNoteButton = new System.Windows.Forms.Label();
+            this.CloseButton = new System.Windows.Forms.Label();
+            this.dragIconLabel = new System.Windows.Forms.Label();
             this.blueColor = new System.Windows.Forms.ToolStripMenuItem();
             this.greenColor = new System.Windows.Forms.ToolStripMenuItem();
             this.pinkColor = new System.Windows.Forms.ToolStripMenuItem();
             this.purpleColor = new System.Windows.Forms.ToolStripMenuItem();
             this.whiteColor = new System.Windows.Forms.ToolStripMenuItem();
             this.yellowColor = new System.Windows.Forms.ToolStripMenuItem();
-            this.CloseButton = new System.Windows.Forms.Label();
-            this.ToolBarPanel = new System.Windows.Forms.Panel();
-            this.lastUpdatedField = new System.Windows.Forms.Label();
-            this.AddNoteButton = new System.Windows.Forms.Label();
-            this.dragIconLabel = new System.Windows.Forms.Label();
-            this.NoteTextBox = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.ToolBarPanel.SuspendLayout();
             this.SuspendLayout();
@@ -94,8 +94,7 @@
             this.arialToolStripMenuItem,
             this.calibriToolStripMenuItem,
             this.sergoUIToolStripMenuItem,
-            this.segioScriptToolStripMenuItem,
-            this.noTimesNewRomandFaggotToolStripMenuItem});
+            this.segioScriptToolStripMenuItem});
             this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
             this.fontToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.fontToolStripMenuItem.Text = "Font";
@@ -104,7 +103,7 @@
             // 
             this.arialToolStripMenuItem.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.arialToolStripMenuItem.Name = "arialToolStripMenuItem";
-            this.arialToolStripMenuItem.Size = new System.Drawing.Size(236, 32);
+            this.arialToolStripMenuItem.Size = new System.Drawing.Size(175, 32);
             this.arialToolStripMenuItem.Text = "Arial";
             this.arialToolStripMenuItem.Click += new System.EventHandler(this.arialToolStripMenuItem_Click);
             // 
@@ -112,7 +111,7 @@
             // 
             this.calibriToolStripMenuItem.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.calibriToolStripMenuItem.Name = "calibriToolStripMenuItem";
-            this.calibriToolStripMenuItem.Size = new System.Drawing.Size(236, 32);
+            this.calibriToolStripMenuItem.Size = new System.Drawing.Size(175, 32);
             this.calibriToolStripMenuItem.Text = "Calibri";
             this.calibriToolStripMenuItem.Click += new System.EventHandler(this.calibriToolStripMenuItem_Click);
             // 
@@ -120,7 +119,7 @@
             // 
             this.sergoUIToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sergoUIToolStripMenuItem.Name = "sergoUIToolStripMenuItem";
-            this.sergoUIToolStripMenuItem.Size = new System.Drawing.Size(236, 32);
+            this.sergoUIToolStripMenuItem.Size = new System.Drawing.Size(175, 32);
             this.sergoUIToolStripMenuItem.Text = "Segio UI";
             this.sergoUIToolStripMenuItem.Click += new System.EventHandler(this.sergoUIToolStripMenuItem_Click);
             // 
@@ -128,16 +127,9 @@
             // 
             this.segioScriptToolStripMenuItem.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.segioScriptToolStripMenuItem.Name = "segioScriptToolStripMenuItem";
-            this.segioScriptToolStripMenuItem.Size = new System.Drawing.Size(236, 32);
+            this.segioScriptToolStripMenuItem.Size = new System.Drawing.Size(175, 32);
             this.segioScriptToolStripMenuItem.Text = "Segio Script";
             this.segioScriptToolStripMenuItem.Click += new System.EventHandler(this.segioScriptToolStripMenuItem_Click);
-            // 
-            // noTimesNewRomandFaggotToolStripMenuItem
-            // 
-            this.noTimesNewRomandFaggotToolStripMenuItem.Name = "noTimesNewRomandFaggotToolStripMenuItem";
-            this.noTimesNewRomandFaggotToolStripMenuItem.Size = new System.Drawing.Size(236, 32);
-            this.noTimesNewRomandFaggotToolStripMenuItem.Text = "No Times New Roman, Faggot";
-            this.noTimesNewRomandFaggotToolStripMenuItem.Click += new System.EventHandler(this.noTimesNewRomandFaggotToolStripMenuItem_Click);
             // 
             // colorToolStripMenuItem
             // 
@@ -151,64 +143,6 @@
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
             this.colorToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.colorToolStripMenuItem.Text = "Color";
-            // 
-            // blueColor
-            // 
-            this.blueColor.Name = "blueColor";
-            this.blueColor.Size = new System.Drawing.Size(109, 22);
-            this.blueColor.Text = "Blue";
-            // 
-            // greenColor
-            // 
-            this.greenColor.Name = "greenColor";
-            this.greenColor.Size = new System.Drawing.Size(109, 22);
-            this.greenColor.Text = "Green";
-            this.greenColor.Click += new System.EventHandler(this.colorClicked);
-            // 
-            // pinkColor
-            // 
-            this.pinkColor.Image = global::Simplisticky.Properties.Resources.pink;
-            this.pinkColor.Name = "pinkColor";
-            this.pinkColor.Size = new System.Drawing.Size(109, 22);
-            this.pinkColor.Text = "Pink";
-            this.pinkColor.Click += new System.EventHandler(this.colorClicked);
-            // 
-            // purpleColor
-            // 
-            this.purpleColor.Name = "purpleColor";
-            this.purpleColor.Size = new System.Drawing.Size(109, 22);
-            this.purpleColor.Text = "Purple";
-            // 
-            // whiteColor
-            // 
-            this.whiteColor.Name = "whiteColor";
-            this.whiteColor.Size = new System.Drawing.Size(109, 22);
-            this.whiteColor.Text = "White";
-            this.whiteColor.Click += new System.EventHandler(this.colorClicked);
-            // 
-            // yellowColor
-            // 
-            this.yellowColor.Name = "yellowColor";
-            this.yellowColor.Size = new System.Drawing.Size(109, 22);
-            this.yellowColor.Text = "Yellow";
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloseButton.Font = new System.Drawing.Font("Wingdings 2", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.CloseButton.ForeColor = System.Drawing.Color.DimGray;
-            this.CloseButton.Location = new System.Drawing.Point(27, 5);
-            this.CloseButton.Margin = new System.Windows.Forms.Padding(0);
-            this.CloseButton.MaximumSize = new System.Drawing.Size(20, 20);
-            this.CloseButton.MinimumSize = new System.Drawing.Size(20, 20);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(20, 20);
-            this.CloseButton.TabIndex = 2;
-            this.CloseButton.Text = "O";
-            this.CloseButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.CloseButton.Click += new System.EventHandler(this.closeButton_Click);
-            this.CloseButton.MouseLeave += new System.EventHandler(this.CloseButton_MouseLeave);
-            this.CloseButton.MouseHover += new System.EventHandler(this.CloseButton_MouseHover);
             // 
             // ToolBarPanel
             // 
@@ -244,35 +178,6 @@
             this.lastUpdatedField.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolbar_mouseDown);
             this.lastUpdatedField.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseMove);
             // 
-            // AddNoteButton
-            // 
-            this.AddNoteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddNoteButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddNoteButton.ForeColor = System.Drawing.Color.DimGray;
-            this.AddNoteButton.Location = new System.Drawing.Point(6, 6);
-            this.AddNoteButton.MaximumSize = new System.Drawing.Size(20, 20);
-            this.AddNoteButton.MinimumSize = new System.Drawing.Size(20, 20);
-            this.AddNoteButton.Name = "AddNoteButton";
-            this.AddNoteButton.Size = new System.Drawing.Size(20, 20);
-            this.AddNoteButton.TabIndex = 3;
-            this.AddNoteButton.Text = "+";
-            this.AddNoteButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddNoteButton_Click);
-            this.AddNoteButton.MouseLeave += new System.EventHandler(this.AddNoteButton_MouseLeave);
-            this.AddNoteButton.MouseHover += new System.EventHandler(this.AddNoteButton_MouseHover);
-            // 
-            // dragIconLabel
-            // 
-            this.dragIconLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.dragIconLabel.AutoSize = true;
-            this.dragIconLabel.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
-            this.dragIconLabel.Image = global::Simplisticky.Properties.Resources.drag;
-            this.dragIconLabel.Location = new System.Drawing.Point(188, 162);
-            this.dragIconLabel.MaximumSize = new System.Drawing.Size(8, 8);
-            this.dragIconLabel.MinimumSize = new System.Drawing.Size(8, 8);
-            this.dragIconLabel.Name = "dragIconLabel";
-            this.dragIconLabel.Size = new System.Drawing.Size(8, 8);
-            this.dragIconLabel.TabIndex = 4;
-            // 
             // NoteTextBox
             // 
             this.NoteTextBox.AcceptsReturn = true;
@@ -291,6 +196,96 @@
             this.NoteTextBox.TabIndex = 0;
             this.NoteTextBox.TextChanged += new System.EventHandler(this.NoteTextBox_TextChanged);
             // 
+            // AddNoteButton
+            // 
+            this.AddNoteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddNoteButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddNoteButton.ForeColor = System.Drawing.Color.DimGray;
+            this.AddNoteButton.Image = global::Simplisticky.Properties.Resources.stickynote_add_normal;
+            this.AddNoteButton.Location = new System.Drawing.Point(7, 7);
+            this.AddNoteButton.MaximumSize = new System.Drawing.Size(16, 16);
+            this.AddNoteButton.MinimumSize = new System.Drawing.Size(10, 10);
+            this.AddNoteButton.Name = "AddNoteButton";
+            this.AddNoteButton.Size = new System.Drawing.Size(16, 16);
+            this.AddNoteButton.TabIndex = 3;
+            this.AddNoteButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddNoteButton_Click);
+            this.AddNoteButton.MouseLeave += new System.EventHandler(this.AddNoteButton_MouseLeave);
+            this.AddNoteButton.MouseHover += new System.EventHandler(this.AddNoteButton_MouseHover);
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloseButton.ForeColor = System.Drawing.Color.DimGray;
+            this.CloseButton.Image = global::Simplisticky.Properties.Resources.deletenote_normal;
+            this.CloseButton.Location = new System.Drawing.Point(24, 4);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(0);
+            this.CloseButton.MinimumSize = new System.Drawing.Size(15, 15);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(24, 22);
+            this.CloseButton.TabIndex = 2;
+            this.CloseButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.CloseButton.Click += new System.EventHandler(this.closeButton_Click);
+            this.CloseButton.MouseLeave += new System.EventHandler(this.CloseButton_MouseLeave);
+            this.CloseButton.MouseHover += new System.EventHandler(this.CloseButton_MouseHover);
+            // 
+            // dragIconLabel
+            // 
+            this.dragIconLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dragIconLabel.AutoSize = true;
+            this.dragIconLabel.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.dragIconLabel.Image = global::Simplisticky.Properties.Resources.drag;
+            this.dragIconLabel.Location = new System.Drawing.Point(188, 162);
+            this.dragIconLabel.MaximumSize = new System.Drawing.Size(8, 8);
+            this.dragIconLabel.MinimumSize = new System.Drawing.Size(8, 8);
+            this.dragIconLabel.Name = "dragIconLabel";
+            this.dragIconLabel.Size = new System.Drawing.Size(8, 8);
+            this.dragIconLabel.TabIndex = 4;
+            // 
+            // blueColor
+            // 
+            this.blueColor.Image = global::Simplisticky.Properties.Resources.blue_stickynote;
+            this.blueColor.Name = "blueColor";
+            this.blueColor.Size = new System.Drawing.Size(109, 22);
+            this.blueColor.Text = "Blue";
+            // 
+            // greenColor
+            // 
+            this.greenColor.Image = global::Simplisticky.Properties.Resources.green_stickynote;
+            this.greenColor.Name = "greenColor";
+            this.greenColor.Size = new System.Drawing.Size(109, 22);
+            this.greenColor.Text = "Green";
+            this.greenColor.Click += new System.EventHandler(this.colorClicked);
+            // 
+            // pinkColor
+            // 
+            this.pinkColor.Image = ((System.Drawing.Image)(resources.GetObject("pinkColor.Image")));
+            this.pinkColor.Name = "pinkColor";
+            this.pinkColor.Size = new System.Drawing.Size(109, 22);
+            this.pinkColor.Text = "Pink";
+            this.pinkColor.Click += new System.EventHandler(this.colorClicked);
+            // 
+            // purpleColor
+            // 
+            this.purpleColor.Image = global::Simplisticky.Properties.Resources.purple_stickynote;
+            this.purpleColor.Name = "purpleColor";
+            this.purpleColor.Size = new System.Drawing.Size(109, 22);
+            this.purpleColor.Text = "Purple";
+            // 
+            // whiteColor
+            // 
+            this.whiteColor.Image = ((System.Drawing.Image)(resources.GetObject("whiteColor.Image")));
+            this.whiteColor.Name = "whiteColor";
+            this.whiteColor.Size = new System.Drawing.Size(109, 22);
+            this.whiteColor.Text = "White";
+            this.whiteColor.Click += new System.EventHandler(this.colorClicked);
+            // 
+            // yellowColor
+            // 
+            this.yellowColor.Image = global::Simplisticky.Properties.Resources.yellow_stickynote;
+            this.yellowColor.Name = "yellowColor";
+            this.yellowColor.Size = new System.Drawing.Size(109, 22);
+            this.yellowColor.Text = "Yellow";
+            // 
             // StickyNote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 23F);
@@ -303,8 +298,9 @@
             this.Controls.Add(this.NoteTextBox);
             this.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MinimumSize = new System.Drawing.Size(180, 100);
+            this.MinimumSize = new System.Drawing.Size(180, 60);
             this.Name = "StickyNote";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SimpleStickyNote";
@@ -341,8 +337,6 @@
         private System.Windows.Forms.ToolStripMenuItem purpleColor;
         private System.Windows.Forms.ToolStripMenuItem whiteColor;
         private System.Windows.Forms.ToolStripMenuItem yellowColor;
-        private System.Windows.Forms.ToolStripMenuItem noTimesNewRomandFaggotToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem segioScriptToolStripMenuItem;
     }
 }
-

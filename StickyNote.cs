@@ -151,11 +151,13 @@ namespace Simplisticky {
         }
 
         private void CloseButton_MouseHover(object sender, EventArgs e) {
-            CloseButton.ForeColor = Color.Black;
+            //CloseButton.ForeColor = Color.Black;
+            this.CloseButton.Image = global::Simplisticky.Properties.Resources.deletenote_hover;
         }
 
         private void CloseButton_MouseLeave(object sender, EventArgs e) {
-            CloseButton.ForeColor = Color.DimGray;
+            //CloseButton.ForeColor = Color.DimGray;
+            this.CloseButton.Image = global::Simplisticky.Properties.Resources.deletenote_normal;
         }
 
         private void NoteTextBox_TextChanged(object sender, EventArgs e) {
@@ -179,11 +181,11 @@ namespace Simplisticky {
 
 
         private void AddNoteButton_MouseLeave(object sender, EventArgs e) {
-            AddNoteButton.ForeColor = Color.DimGray;
+            this.AddNoteButton.Image = global::Simplisticky.Properties.Resources.stickynote_add_normal;
         }
 
         private void AddNoteButton_MouseHover(object sender, EventArgs e) {
-            AddNoteButton.ForeColor = Color.Black;
+            this.AddNoteButton.Image = global::Simplisticky.Properties.Resources.stickynote_add_hover;
         }
 
         private void frmDrag_MouseMove(object sender, MouseEventArgs e) {
@@ -252,7 +254,7 @@ namespace Simplisticky {
             if (sender.Equals(greenColor)) {
                 this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(233)))), ((int)(((byte)(175)))));
                 this.ToolBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(247)))), ((int)(((byte)(193)))));
-                this.NoteTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(254)))), ((int)(((byte)(203)))));
+                this.NoteTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(233)))), ((int)(((byte)(175)))));
                 NoteTextBox.Invalidate();
             }
         }
@@ -276,6 +278,7 @@ namespace Simplisticky {
         private void segioScriptToolStripMenuItem_Click(object sender, EventArgs e) {
             this.NoteTextBox.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         }
+
 
     }
 }
