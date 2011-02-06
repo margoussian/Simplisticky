@@ -36,18 +36,18 @@
             this.sergoUIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.segioScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolBarPanel = new System.Windows.Forms.Panel();
-            this.lastUpdatedField = new System.Windows.Forms.Label();
-            this.NoteTextBox = new System.Windows.Forms.TextBox();
-            this.AddNoteButton = new System.Windows.Forms.Label();
-            this.CloseButton = new System.Windows.Forms.Label();
-            this.dragIconLabel = new System.Windows.Forms.Label();
             this.blueColor = new System.Windows.Forms.ToolStripMenuItem();
             this.greenColor = new System.Windows.Forms.ToolStripMenuItem();
             this.pinkColor = new System.Windows.Forms.ToolStripMenuItem();
             this.purpleColor = new System.Windows.Forms.ToolStripMenuItem();
             this.whiteColor = new System.Windows.Forms.ToolStripMenuItem();
             this.yellowColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolBarPanel = new System.Windows.Forms.Panel();
+            this.lastUpdatedField = new System.Windows.Forms.Label();
+            this.AddNoteButton = new System.Windows.Forms.Label();
+            this.CloseButton = new System.Windows.Forms.Label();
+            this.NoteTextBox = new System.Windows.Forms.TextBox();
+            this.dragIconLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.ToolBarPanel.SuspendLayout();
             this.SuspendLayout();
@@ -144,103 +144,6 @@
             this.colorToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.colorToolStripMenuItem.Text = "Color";
             // 
-            // ToolBarPanel
-            // 
-            this.ToolBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(182)))));
-            this.ToolBarPanel.Controls.Add(this.lastUpdatedField);
-            this.ToolBarPanel.Controls.Add(this.AddNoteButton);
-            this.ToolBarPanel.Controls.Add(this.CloseButton);
-            this.ToolBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ToolBarPanel.Location = new System.Drawing.Point(0, 0);
-            this.ToolBarPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ToolBarPanel.Name = "ToolBarPanel";
-            this.ToolBarPanel.Size = new System.Drawing.Size(200, 30);
-            this.ToolBarPanel.TabIndex = 3;
-            this.ToolBarPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolBarPanel_Paint);
-            this.ToolBarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolbar_mouseDown);
-            this.ToolBarPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseMove);
-            // 
-            // lastUpdatedField
-            // 
-            this.lastUpdatedField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lastUpdatedField.AutoSize = true;
-            this.lastUpdatedField.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lastUpdatedField.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lastUpdatedField.Location = new System.Drawing.Point(74, 7);
-            this.lastUpdatedField.MaximumSize = new System.Drawing.Size(120, 16);
-            this.lastUpdatedField.MinimumSize = new System.Drawing.Size(120, 16);
-            this.lastUpdatedField.Name = "lastUpdatedField";
-            this.lastUpdatedField.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lastUpdatedField.Size = new System.Drawing.Size(120, 16);
-            this.lastUpdatedField.TabIndex = 4;
-            this.lastUpdatedField.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lastUpdatedField.Click += new System.EventHandler(this.lastUpdatedField_Click);
-            this.lastUpdatedField.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolbar_mouseDown);
-            this.lastUpdatedField.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseMove);
-            // 
-            // NoteTextBox
-            // 
-            this.NoteTextBox.AcceptsReturn = true;
-            this.NoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.NoteTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(225)))));
-            this.NoteTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.NoteTextBox.ContextMenuStrip = this.contextMenuStrip1;
-            this.NoteTextBox.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NoteTextBox.Location = new System.Drawing.Point(13, 40);
-            this.NoteTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.NoteTextBox.Multiline = true;
-            this.NoteTextBox.Name = "NoteTextBox";
-            this.NoteTextBox.Size = new System.Drawing.Size(174, 119);
-            this.NoteTextBox.TabIndex = 0;
-            this.NoteTextBox.TextChanged += new System.EventHandler(this.NoteTextBox_TextChanged);
-            // 
-            // AddNoteButton
-            // 
-            this.AddNoteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddNoteButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddNoteButton.ForeColor = System.Drawing.Color.DimGray;
-            this.AddNoteButton.Image = global::Simplisticky.Properties.Resources.stickynote_add_normal;
-            this.AddNoteButton.Location = new System.Drawing.Point(7, 7);
-            this.AddNoteButton.MaximumSize = new System.Drawing.Size(16, 16);
-            this.AddNoteButton.MinimumSize = new System.Drawing.Size(10, 10);
-            this.AddNoteButton.Name = "AddNoteButton";
-            this.AddNoteButton.Size = new System.Drawing.Size(16, 16);
-            this.AddNoteButton.TabIndex = 3;
-            this.AddNoteButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddNoteButton_Click);
-            this.AddNoteButton.MouseLeave += new System.EventHandler(this.AddNoteButton_MouseLeave);
-            this.AddNoteButton.MouseHover += new System.EventHandler(this.AddNoteButton_MouseHover);
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloseButton.ForeColor = System.Drawing.Color.DimGray;
-            this.CloseButton.Image = global::Simplisticky.Properties.Resources.deletenote_normal;
-            this.CloseButton.Location = new System.Drawing.Point(24, 4);
-            this.CloseButton.Margin = new System.Windows.Forms.Padding(0);
-            this.CloseButton.MinimumSize = new System.Drawing.Size(15, 15);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(24, 22);
-            this.CloseButton.TabIndex = 2;
-            this.CloseButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.CloseButton.Click += new System.EventHandler(this.closeButton_Click);
-            this.CloseButton.MouseLeave += new System.EventHandler(this.CloseButton_MouseLeave);
-            this.CloseButton.MouseHover += new System.EventHandler(this.CloseButton_MouseHover);
-            // 
-            // dragIconLabel
-            // 
-            this.dragIconLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.dragIconLabel.AutoSize = true;
-            this.dragIconLabel.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
-            this.dragIconLabel.Image = global::Simplisticky.Properties.Resources.drag;
-            this.dragIconLabel.Location = new System.Drawing.Point(188, 162);
-            this.dragIconLabel.MaximumSize = new System.Drawing.Size(8, 8);
-            this.dragIconLabel.MinimumSize = new System.Drawing.Size(8, 8);
-            this.dragIconLabel.Name = "dragIconLabel";
-            this.dragIconLabel.Size = new System.Drawing.Size(8, 8);
-            this.dragIconLabel.TabIndex = 4;
-            // 
             // blueColor
             // 
             this.blueColor.Image = global::Simplisticky.Properties.Resources.blue_stickynote;
@@ -286,6 +189,103 @@
             this.yellowColor.Size = new System.Drawing.Size(109, 22);
             this.yellowColor.Text = "Yellow";
             // 
+            // ToolBarPanel
+            // 
+            this.ToolBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(182)))));
+            this.ToolBarPanel.Controls.Add(this.lastUpdatedField);
+            this.ToolBarPanel.Controls.Add(this.AddNoteButton);
+            this.ToolBarPanel.Controls.Add(this.CloseButton);
+            this.ToolBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ToolBarPanel.Location = new System.Drawing.Point(0, 0);
+            this.ToolBarPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ToolBarPanel.Name = "ToolBarPanel";
+            this.ToolBarPanel.Size = new System.Drawing.Size(200, 30);
+            this.ToolBarPanel.TabIndex = 3;
+            this.ToolBarPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolBarPanel_Paint);
+            this.ToolBarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolbar_mouseDown);
+            this.ToolBarPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseMove);
+            // 
+            // lastUpdatedField
+            // 
+            this.lastUpdatedField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lastUpdatedField.AutoSize = true;
+            this.lastUpdatedField.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lastUpdatedField.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lastUpdatedField.Location = new System.Drawing.Point(38, 7);
+            this.lastUpdatedField.MaximumSize = new System.Drawing.Size(120, 16);
+            this.lastUpdatedField.MinimumSize = new System.Drawing.Size(120, 16);
+            this.lastUpdatedField.Name = "lastUpdatedField";
+            this.lastUpdatedField.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lastUpdatedField.Size = new System.Drawing.Size(120, 16);
+            this.lastUpdatedField.TabIndex = 4;
+            this.lastUpdatedField.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lastUpdatedField.Click += new System.EventHandler(this.lastUpdatedField_Click);
+            this.lastUpdatedField.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolbar_mouseDown);
+            this.lastUpdatedField.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseMove);
+            // 
+            // AddNoteButton
+            // 
+            this.AddNoteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddNoteButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddNoteButton.ForeColor = System.Drawing.Color.DimGray;
+            this.AddNoteButton.Image = global::Simplisticky.Properties.Resources.stickynote_add_normal;
+            this.AddNoteButton.Location = new System.Drawing.Point(7, 7);
+            this.AddNoteButton.MaximumSize = new System.Drawing.Size(16, 16);
+            this.AddNoteButton.MinimumSize = new System.Drawing.Size(10, 10);
+            this.AddNoteButton.Name = "AddNoteButton";
+            this.AddNoteButton.Size = new System.Drawing.Size(16, 16);
+            this.AddNoteButton.TabIndex = 3;
+            this.AddNoteButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddNoteButton_Click);
+            this.AddNoteButton.MouseLeave += new System.EventHandler(this.AddNoteButton_MouseLeave);
+            this.AddNoteButton.MouseHover += new System.EventHandler(this.AddNoteButton_MouseHover);
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloseButton.ForeColor = System.Drawing.Color.DimGray;
+            this.CloseButton.Image = global::Simplisticky.Properties.Resources.deletenote_normal;
+            this.CloseButton.Location = new System.Drawing.Point(175, 4);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(0);
+            this.CloseButton.MinimumSize = new System.Drawing.Size(15, 15);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(24, 22);
+            this.CloseButton.TabIndex = 2;
+            this.CloseButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.CloseButton.Click += new System.EventHandler(this.closeButton_Click);
+            this.CloseButton.MouseLeave += new System.EventHandler(this.CloseButton_MouseLeave);
+            this.CloseButton.MouseHover += new System.EventHandler(this.CloseButton_MouseHover);
+            // 
+            // NoteTextBox
+            // 
+            this.NoteTextBox.AcceptsReturn = true;
+            this.NoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.NoteTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(225)))));
+            this.NoteTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.NoteTextBox.ContextMenuStrip = this.contextMenuStrip1;
+            this.NoteTextBox.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NoteTextBox.Location = new System.Drawing.Point(6, 34);
+            this.NoteTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.NoteTextBox.Multiline = true;
+            this.NoteTextBox.Name = "NoteTextBox";
+            this.NoteTextBox.Size = new System.Drawing.Size(187, 128);
+            this.NoteTextBox.TabIndex = 0;
+            this.NoteTextBox.TextChanged += new System.EventHandler(this.NoteTextBox_TextChanged);
+            // 
+            // dragIconLabel
+            // 
+            this.dragIconLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dragIconLabel.AutoSize = true;
+            this.dragIconLabel.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.dragIconLabel.Image = global::Simplisticky.Properties.Resources.drag;
+            this.dragIconLabel.Location = new System.Drawing.Point(188, 162);
+            this.dragIconLabel.MaximumSize = new System.Drawing.Size(8, 8);
+            this.dragIconLabel.MinimumSize = new System.Drawing.Size(8, 8);
+            this.dragIconLabel.Name = "dragIconLabel";
+            this.dragIconLabel.Size = new System.Drawing.Size(8, 8);
+            this.dragIconLabel.TabIndex = 4;
+            // 
             // StickyNote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 23F);
@@ -302,6 +302,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MinimumSize = new System.Drawing.Size(180, 60);
             this.Name = "StickyNote";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SimpleStickyNote";
             this.Load += new System.EventHandler(this.stickyNote_Load);

@@ -42,11 +42,14 @@ namespace Simplisticky {
          public void Read(List<StickyNote> notelist) {
 
             try {
+                if (!System.IO.File.Exists(document)) {
+                    // create new XML file here
+                    using (System.IO.File.CreateText(document));
+                    
+                }
                 myxmlDocument.Load(document);
                 xmlReader = new XmlTextReader(document);
-                if (xmlReader == null) {
-                    // create new XML file here
-                }
+
                 while (xmlReader.Read()) {
                     switch (xmlReader.NodeType) {
                         case XmlNodeType.Element: // The node is an element.
