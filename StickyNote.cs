@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using System.Net;
 using Sharpnote;
 
@@ -16,20 +17,25 @@ namespace Simplisticky {
         private ApplicationController app;
         private String key, created, modified;
         private int show, font, color;
-        private int newX, newY, newCount = 1;
+        private int newX, newY;
+        private int newCount = 1;
+        private StickyNote creator;
+        
         
         private const int CS_DROPSHADOW = 0x20000;
+        private const int WS_DLGFRAME = 0x00400000;
         DateTime current;
 
         #region constructors
 
         public StickyNote(String _key, String _created, String _modified, String _text,
                           int _show, int _width, int _height, int _font, int _color,
-                          Point _p, ApplicationController _app) {
+                          Point _p, ApplicationController _app, StickyNote _creator) {
             InitializeComponent();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
 
             app = _app;
+            creator = _creator;
             key = _key;
             this.NoteTextBox.Text = _text;
             created = _created;
@@ -42,11 +48,12 @@ namespace Simplisticky {
 //            setColor();
         }
 
-        public StickyNote(ApplicationController _app) {
+        public StickyNote(ApplicationController _app, StickyNote _creator) {
 
             InitializeComponent();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             app = _app;
+            creator = _creator;
         }
 
         #endregion
@@ -54,23 +61,54 @@ namespace Simplisticky {
         #region ButtonEvents
 
         private void AddNoteButton_Click(object sender, MouseEventArgs e) {
-            StickyNote newNote = new StickyNote(app);
-            newX = this.Location.X + this.Width + (newCount * 20);
-            newY = this.Location.Y + ((newCount-1) * 20);
+            StickyNote newNote = new StickyNote(app, this);
+            Screen screen = Screen.FromControl(this);
+            Rectangle workingArea = screen.WorkingArea;
+            int workingAreaHalf_X = screen.WorkingArea.Width / 2;
+            int workingAreaMax_Y = screen.WorkingArea.Height;
+
+            newX = this.Location.X + this.Width + (newCount * 10);
+            newY = this.Location.Y + ((newCount-1) * 10);
+
+            if ((newY +183) > workingAreaMax_Y) {
+                newY = this.Location.Y;
+                newX = this.Location.X + this.Width + (newCount * 10);
+                if (newX > workingAreaHalf_X) {
+                    newX = this.Location.X - this.Width - (newCount * 10);
+                }
+            }
+            if (newX > workingAreaHalf_X) {
+                newX = this.Location.X - this.Width - (newCount * 10);
+            }
             newCount++;
             newNote.Location = new Point(newX, newY);
             app.Notelist.Add(newNote);
-            System.Console.WriteLine(app.Notelist.Count);
             newNote.Show();
         }
 
         #endregion
 
-        
-
         #region Accessors
 
         // Accessors
+
+        public int NewCount {
+            get {
+                return newCount;
+            }
+            set {
+                newCount = value;
+            }
+        }
+
+        public StickyNote Creator {
+            get {
+                return creator;
+            }
+            set {
+                creator = value;
+            }
+        }
 
         public String Key {
             get {
@@ -139,14 +177,31 @@ namespace Simplisticky {
 
         // Need to clean up everything below this comment line
 
+
+       public void DrawGripper(PaintEventArgs e) {
+           if (VisualStyleRenderer.IsElementDefined(
+               VisualStyleElement.Status.Gripper.Normal)) {
+               VisualStyleRenderer renderer = new VisualStyleRenderer(VisualStyleElement.Status.Gripper.Normal);
+               Rectangle rectangle1 = new Rectangle((Width) - 18, (Height) - 20, 20, 20);
+               renderer.DrawBackground(e.Graphics, rectangle1);
+           }
+       }
+
+       protected override void OnPaint(PaintEventArgs e) {
+           base.OnPaint(e);
+           DrawGripper(e);
+       }
+
+       private void StickyNote_Paint(object sender, System.Windows.Forms.PaintEventArgs e) {
+          
+       }
+
         Point lastClick;
 
-        private void stickyNote_Load(object sender, EventArgs e) {
-
-        }
+   
 
         private void closeButton_Click(object sender, EventArgs e) {
-            ConfirmDeleteDialog confirmDelete = new ConfirmDeleteDialog(this);
+            ConfirmDeleteDialog confirmDelete = new ConfirmDeleteDialog(this, app);
             confirmDelete.Show();
         }
 
@@ -162,7 +217,7 @@ namespace Simplisticky {
 
         private void NoteTextBox_TextChanged(object sender, EventArgs e) {
             current = DateTime.Now;
-            this.lastUpdatedField.Text = current.ToString();
+//            this.lastUpdatedField.Text = current.ToString();
         }
 
 
@@ -195,6 +250,7 @@ namespace Simplisticky {
                 //Move the Form the same difference the mouse cursor moved;
                 this.Left += e.X - lastClick.X;
                 this.Top += e.Y - lastClick.Y;
+                NewCount = 1;
             }
         }
 
@@ -218,8 +274,10 @@ namespace Simplisticky {
         
         protected override CreateParams CreateParams {
             get {
+
                 CreateParams cp = base.CreateParams;
                 cp.ClassStyle |= CS_DROPSHADOW;
+                cp.Style = cp.Style & ~WS_DLGFRAME;
                 return cp;
             }
         }
@@ -257,10 +315,6 @@ namespace Simplisticky {
                 this.NoteTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(233)))), ((int)(((byte)(175)))));
                 NoteTextBox.Invalidate();
             }
-        }
-
-        private void noTimesNewRomandFaggotToolStripMenuItem_Click(object sender, EventArgs e) {
-
         }
 
         private void arialToolStripMenuItem_Click(object sender, EventArgs e) {

@@ -10,10 +10,12 @@ using System.Windows.Forms;
 namespace Simplisticky {
     public partial class ConfirmDeleteDialog : Form {
         StickyNote note;
+        ApplicationController app;
 
-        public ConfirmDeleteDialog(StickyNote _note) {
+        public ConfirmDeleteDialog(StickyNote _note, ApplicationController _app) {
             InitializeComponent();
             note = _note;
+            app = _app;
         }
 
         private void ConfirmDeleteDialog_Load(object sender, EventArgs e) {
@@ -29,7 +31,15 @@ namespace Simplisticky {
         }
 
         private void ConfirmDeleteButton_Click(object sender, EventArgs e) {
-            Application.Exit();
+            // simplenote api call to delete remote copy
+
+            app.Notelist.Remove(note);
+            if (note.Creator != null) {
+                note.Creator.NewCount--;
+            }
+            note.Hide();
+            this.Hide();
+
             /*note.noteCollection.Remove(note);
             if (note.noteCollection.Count == 0) {
                 Application.Exit();

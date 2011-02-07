@@ -31,7 +31,7 @@ namespace Simplisticky {
                 app.Main = new MainWindow(2,true,app);
 
                 if (app.Notelist.Count == 0) {  // Nothing stored in XML File
-                    StickyNote note = new StickyNote(app);
+                    StickyNote note = new StickyNote(app, null);
                     app.Notelist.Add(note);
                     note.Location = new Point(50, 50);
                     note.Show();
@@ -42,7 +42,7 @@ namespace Simplisticky {
                 app.Main = new MainWindow(0, Properties.Settings.Default.showmain, app);
                 loadLocalContent();
                 if (app.Notelist.Count == 0) {  // Nothing stored in XML File
-                    StickyNote note = new StickyNote(app);
+                    StickyNote note = new StickyNote(app, null);
                     app.Notelist.Add(note);
                     note.Location = new Point(50, 50);
                     note.Show();

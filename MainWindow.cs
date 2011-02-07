@@ -42,6 +42,9 @@ namespace Simplisticky {
 
         private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e) {
             this.Show();
+            foreach (StickyNote n in app.Notelist) {
+                n.BringToFront();
+            }
             Properties.Settings.Default.showmain = true;
             Properties.Settings.Default.Save();
         }

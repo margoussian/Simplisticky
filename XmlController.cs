@@ -46,56 +46,57 @@ namespace Simplisticky {
                     // create new XML file here
                     using (System.IO.File.CreateText(document));
                     
-                }
-                myxmlDocument.Load(document);
-                xmlReader = new XmlTextReader(document);
+                } else {
+                    myxmlDocument.Load(document);
+                    xmlReader = new XmlTextReader(document);
 
-                while (xmlReader.Read()) {
-                    switch (xmlReader.NodeType) {
-                        case XmlNodeType.Element: // The node is an element.
-                            if (xmlReader.Name == "key") {
-                                key = xmlReader.ReadString();
-                            }
-                            if (xmlReader.Name == "created") {
-                                created = xmlReader.ReadString();
-                            }
-                            if (xmlReader.Name == "modified") {
-                                modified = xmlReader.ReadString();
-                            }
-                            if (xmlReader.Name == "text") {
-                                text = xmlReader.ReadString();
-                            }
-                            if (xmlReader.Name == "show") {
-                                show = Convert.ToInt32(xmlReader.ReadString());
-                            }
-                            if (xmlReader.Name == "topleft") {
-                                String[] temp = xmlReader.ReadString().Split(new char[] {','});
-                                topleft = new Point(Convert.ToInt32(temp[0]), Convert.ToInt32(temp[1]));
-                            }
-                            if (xmlReader.Name == "width") {
-                                width = Convert.ToInt32(xmlReader.ReadString());
-                            }
-                            if (xmlReader.Name == "height") {
-                                height = Convert.ToInt32(xmlReader.ReadString());
-                            }
-                            if (xmlReader.Name == "font") {
-                                font = Convert.ToInt32(xmlReader.ReadString());
-                            }
-                            if (xmlReader.Name == "color") {
-                                color = Convert.ToInt32(xmlReader.ReadString());
-                            }
-                            break;
-                        case XmlNodeType.EndElement:
+                    while (xmlReader.Read()) {
+                        switch (xmlReader.NodeType) {
+                            case XmlNodeType.Element: // The node is an element.
+                                if (xmlReader.Name == "key") {
+                                    key = xmlReader.ReadString();
+                                }
+                                if (xmlReader.Name == "created") {
+                                    created = xmlReader.ReadString();
+                                }
+                                if (xmlReader.Name == "modified") {
+                                    modified = xmlReader.ReadString();
+                                }
+                                if (xmlReader.Name == "text") {
+                                    text = xmlReader.ReadString();
+                                }
+                                if (xmlReader.Name == "show") {
+                                    show = Convert.ToInt32(xmlReader.ReadString());
+                                }
+                                if (xmlReader.Name == "topleft") {
+                                    String[] temp = xmlReader.ReadString().Split(new char[] { ',' });
+                                    topleft = new Point(Convert.ToInt32(temp[0]), Convert.ToInt32(temp[1]));
+                                }   
+                                if (xmlReader.Name == "width") {
+                                    width = Convert.ToInt32(xmlReader.ReadString());
+                                }
+                                if (xmlReader.Name == "height") {
+                                    height = Convert.ToInt32(xmlReader.ReadString());
+                                }
+                                if (xmlReader.Name == "font") {
+                                    font = Convert.ToInt32(xmlReader.ReadString());
+                                }
+                                if (xmlReader.Name == "color") {
+                                    color = Convert.ToInt32(xmlReader.ReadString());
+                                }
+                                break;
+                            case XmlNodeType.EndElement:
 
-                            if (xmlReader.Name == "note") { // Create a new Stickynote and insert it into the notelist
-                                note = new StickyNote(key,created,modified,text,show,width,height,font,color,topleft,app);
-                                app.Notelist.Add(note);
-                                note.Show();
-                            }
-                            break;
+                                if (xmlReader.Name == "note") { // Create a new Stickynote and insert it into the notelist
+                                    note = new StickyNote(key, created, modified, text, show, width, height, font, color, topleft, app, null);
+                                    app.Notelist.Add(note);
+                                    note.Show();
+                                }
+                                break;
+                        }   
                     }
+                    xmlReader.Close();
                 }
-                xmlReader.Close();
             }
             catch (Exception e) {
                 System.Console.WriteLine("ERROR in XMLREAD: " + e.Message);
