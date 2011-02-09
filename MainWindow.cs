@@ -42,8 +42,9 @@ namespace Simplisticky {
 
         private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e) {
             this.Show();
+            this.Activate();
             foreach (StickyNote n in app.Notelist) {
-                n.BringToFront();
+                n.Activate();
             }
             Properties.Settings.Default.showmain = true;
             Properties.Settings.Default.Save();
@@ -51,11 +52,13 @@ namespace Simplisticky {
 
         private void sysTrayQuit_Click(object sender, EventArgs e) {
             app.Xml.Write(app.Notelist);
+            notifyIcon.Visible = false;
             Application.Exit();
         }
 
         private void quitButton_Click(object sender, EventArgs e) {
             app.Xml.Write(app.Notelist);
+            notifyIcon.Visible = false;
             Application.Exit();
         }
 
@@ -152,6 +155,28 @@ namespace Simplisticky {
                 app.Xml.Write(app.Notelist);
                 Application.Exit();
             }
+        }
+
+        private void newNoteButton_Click_1(object sender, EventArgs e) {
+            StickyNote newNote;
+            try {
+                if (app.Notelist.Count > 0) {
+                    newNote = app.Notelist[app.Notelist.Count - 1];
+                    if (newNote != null) {
+                        newNote.spawnNewNote();
+                    }
+                }
+                else {
+                    newNote = new StickyNote(app, null);
+                    app.Notelist.Add(newNote);
+                    newNote.Location = new Point(190, 210);
+                    newNote.Show();
+                }
+            }
+            catch (Exception errorCreatingNewNote) {
+                System.Console.WriteLine(errorCreatingNewNote.Message);
+            }
+
         }
 
     }

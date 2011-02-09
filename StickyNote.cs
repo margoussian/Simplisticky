@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using System.Windows.Forms.Integration;
 using System.Net;
 using Sharpnote;
 
@@ -175,22 +176,32 @@ namespace Simplisticky {
 
         #endregion
 
+        private void DrawGripper(PaintEventArgs e) {
+            try {
+                if (VisualStyleRenderer.IsElementDefined(
+                    VisualStyleElement.Status.Gripper.Normal)) {
+                    VisualStyleRenderer renderer = new VisualStyleRenderer(VisualStyleElement.Status.Gripper.Normal);
+                    Rectangle rectangle1 = new Rectangle((Width) - 18, (Height) - 20, 20, 20);
+                    renderer.DrawBackground(e.Graphics, rectangle1);
+                }
+            }
+            catch (Exception error) {
+                System.Console.WriteLine(error.Message);
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e) {
+            base.OnPaint(e);
+            DrawGripper(e);
+        }
+
+        public void spawnNewNote() {
+            AddNoteButton_Click(null, null);
+        }
+
         // Need to clean up everything below this comment line
 
 
-       public void DrawGripper(PaintEventArgs e) {
-           if (VisualStyleRenderer.IsElementDefined(
-               VisualStyleElement.Status.Gripper.Normal)) {
-               VisualStyleRenderer renderer = new VisualStyleRenderer(VisualStyleElement.Status.Gripper.Normal);
-               Rectangle rectangle1 = new Rectangle((Width) - 18, (Height) - 20, 20, 20);
-               renderer.DrawBackground(e.Graphics, rectangle1);
-           }
-       }
-
-       protected override void OnPaint(PaintEventArgs e) {
-           base.OnPaint(e);
-           DrawGripper(e);
-       }
 
        private void StickyNote_Paint(object sender, System.Windows.Forms.PaintEventArgs e) {
           
@@ -201,11 +212,13 @@ namespace Simplisticky {
    
 
         private void closeButton_Click(object sender, EventArgs e) {
-            ConfirmDeleteDialog confirmDelete = new ConfirmDeleteDialog(this, app);
-            confirmDelete.Show();
+            CloseButton.Hide();
+            DeleteDialog.Show();
+            //ConfirmDeleteDialog confirmDelete = new ConfirmDeleteDialog(this, app);
+            //confirmDelete.Show();
         }
 
-        private void CloseButton_MouseHover(object sender, EventArgs e) {
+        private void CloseButton_MouseEnter(object sender, EventArgs e) {
             //CloseButton.ForeColor = Color.Black;
             this.CloseButton.Image = global::Simplisticky.Properties.Resources.deletenote_hover;
         }
@@ -239,7 +252,7 @@ namespace Simplisticky {
             this.AddNoteButton.Image = global::Simplisticky.Properties.Resources.stickynote_add_normal;
         }
 
-        private void AddNoteButton_MouseHover(object sender, EventArgs e) {
+        private void AddNoteButton_MouseEnter(object sender, EventArgs e) {
             this.AddNoteButton.Image = global::Simplisticky.Properties.Resources.stickynote_add_hover;
         }
 
@@ -331,6 +344,19 @@ namespace Simplisticky {
 
         private void segioScriptToolStripMenuItem_Click(object sender, EventArgs e) {
             this.NoteTextBox.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        }
+
+        private void cancelDelete_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            DeleteDialog.Hide();
+            CloseButton.Show();
+        }
+
+        private void confirmDelete_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            app.Notelist.Remove(this);
+            if (Creator != null) {
+                Creator.NewCount--;
+            }
+            this.Hide();
         }
 
 

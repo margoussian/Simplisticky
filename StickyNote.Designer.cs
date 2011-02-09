@@ -43,12 +43,18 @@
             this.whiteColor = new System.Windows.Forms.ToolStripMenuItem();
             this.yellowColor = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolBarPanel = new System.Windows.Forms.Panel();
+            this.DeleteDialog = new System.Windows.Forms.Panel();
+            this.slash = new System.Windows.Forms.Label();
+            this.confirmDelete = new System.Windows.Forms.LinkLabel();
+            this.cancelDelete = new System.Windows.Forms.LinkLabel();
+            this.deleteNoteLabel = new System.Windows.Forms.Label();
             this.infoButton = new System.Windows.Forms.Label();
             this.AddNoteButton = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Label();
             this.NoteTextBox = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.ToolBarPanel.SuspendLayout();
+            this.DeleteDialog.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -191,6 +197,7 @@
             // ToolBarPanel
             // 
             this.ToolBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(182)))));
+            this.ToolBarPanel.Controls.Add(this.DeleteDialog);
             this.ToolBarPanel.Controls.Add(this.infoButton);
             this.ToolBarPanel.Controls.Add(this.AddNoteButton);
             this.ToolBarPanel.Controls.Add(this.CloseButton);
@@ -203,6 +210,80 @@
             this.ToolBarPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolBarPanel_Paint);
             this.ToolBarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolbar_mouseDown);
             this.ToolBarPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseMove);
+            // 
+            // DeleteDialog
+            // 
+            this.DeleteDialog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DeleteDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(182)))));
+            this.DeleteDialog.Controls.Add(this.slash);
+            this.DeleteDialog.Controls.Add(this.confirmDelete);
+            this.DeleteDialog.Controls.Add(this.cancelDelete);
+            this.DeleteDialog.Controls.Add(this.deleteNoteLabel);
+            this.DeleteDialog.Location = new System.Drawing.Point(72, 2);
+            this.DeleteDialog.Name = "DeleteDialog";
+            this.DeleteDialog.Size = new System.Drawing.Size(125, 25);
+            this.DeleteDialog.TabIndex = 6;
+            this.DeleteDialog.Visible = false;
+            this.DeleteDialog.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolbar_mouseDown);
+            this.DeleteDialog.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseMove);
+            // 
+            // slash
+            // 
+            this.slash.AutoSize = true;
+            this.slash.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.slash.Location = new System.Drawing.Point(95, 5);
+            this.slash.Name = "slash";
+            this.slash.Size = new System.Drawing.Size(12, 14);
+            this.slash.TabIndex = 3;
+            this.slash.Text = "/";
+            this.slash.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolbar_mouseDown);
+            this.slash.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseMove);
+            // 
+            // confirmDelete
+            // 
+            this.confirmDelete.ActiveLinkColor = System.Drawing.Color.Black;
+            this.confirmDelete.AutoSize = true;
+            this.confirmDelete.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.confirmDelete.ForeColor = System.Drawing.Color.DimGray;
+            this.confirmDelete.LinkColor = System.Drawing.Color.DimGray;
+            this.confirmDelete.Location = new System.Drawing.Point(75, 5);
+            this.confirmDelete.Name = "confirmDelete";
+            this.confirmDelete.Size = new System.Drawing.Size(23, 14);
+            this.confirmDelete.TabIndex = 1;
+            this.confirmDelete.TabStop = true;
+            this.confirmDelete.Text = "Yes";
+            this.confirmDelete.VisitedLinkColor = System.Drawing.Color.DimGray;
+            this.confirmDelete.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.confirmDelete_LinkClicked);
+            // 
+            // cancelDelete
+            // 
+            this.cancelDelete.ActiveLinkColor = System.Drawing.Color.Black;
+            this.cancelDelete.AutoSize = true;
+            this.cancelDelete.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelDelete.ForeColor = System.Drawing.Color.DimGray;
+            this.cancelDelete.LinkColor = System.Drawing.Color.DimGray;
+            this.cancelDelete.Location = new System.Drawing.Point(103, 5);
+            this.cancelDelete.Name = "cancelDelete";
+            this.cancelDelete.Size = new System.Drawing.Size(21, 14);
+            this.cancelDelete.TabIndex = 2;
+            this.cancelDelete.TabStop = true;
+            this.cancelDelete.Text = "No";
+            this.cancelDelete.VisitedLinkColor = System.Drawing.Color.DimGray;
+            this.cancelDelete.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.cancelDelete_LinkClicked);
+            // 
+            // deleteNoteLabel
+            // 
+            this.deleteNoteLabel.AutoSize = true;
+            this.deleteNoteLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(182)))));
+            this.deleteNoteLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteNoteLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.deleteNoteLabel.Location = new System.Drawing.Point(1, 5);
+            this.deleteNoteLabel.Name = "deleteNoteLabel";
+            this.deleteNoteLabel.Size = new System.Drawing.Size(78, 14);
+            this.deleteNoteLabel.TabIndex = 0;
+            this.deleteNoteLabel.Text = "Delete note?";
+            this.deleteNoteLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolbar_mouseDown);
+            this.deleteNoteLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseMove);
             // 
             // infoButton
             // 
@@ -230,8 +311,8 @@
             this.AddNoteButton.Size = new System.Drawing.Size(16, 16);
             this.AddNoteButton.TabIndex = 3;
             this.AddNoteButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddNoteButton_Click);
+            this.AddNoteButton.MouseEnter += new System.EventHandler(this.AddNoteButton_MouseEnter);
             this.AddNoteButton.MouseLeave += new System.EventHandler(this.AddNoteButton_MouseLeave);
-            this.AddNoteButton.MouseHover += new System.EventHandler(this.AddNoteButton_MouseHover);
             // 
             // CloseButton
             // 
@@ -247,8 +328,8 @@
             this.CloseButton.TabIndex = 2;
             this.CloseButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.CloseButton.Click += new System.EventHandler(this.closeButton_Click);
+            this.CloseButton.MouseEnter += new System.EventHandler(this.CloseButton_MouseEnter);
             this.CloseButton.MouseLeave += new System.EventHandler(this.CloseButton_MouseLeave);
-            this.CloseButton.MouseHover += new System.EventHandler(this.CloseButton_MouseHover);
             // 
             // NoteTextBox
             // 
@@ -279,7 +360,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MinimumSize = new System.Drawing.Size(110, 65);
+            this.MinimumSize = new System.Drawing.Size(180, 65);
             this.Name = "StickyNote";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
@@ -287,6 +368,8 @@
             this.Text = "SimpleStickyNote";
             this.contextMenuStrip1.ResumeLayout(false);
             this.ToolBarPanel.ResumeLayout(false);
+            this.DeleteDialog.ResumeLayout(false);
+            this.DeleteDialog.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -315,6 +398,11 @@
         private System.Windows.Forms.ToolStripMenuItem segioScriptToolStripMenuItem;
         private System.Windows.Forms.Label infoButton;
         private System.Windows.Forms.RichTextBox NoteTextBox;
+        private System.Windows.Forms.Panel DeleteDialog;
+        private System.Windows.Forms.Label slash;
+        private System.Windows.Forms.LinkLabel confirmDelete;
+        private System.Windows.Forms.LinkLabel cancelDelete;
+        private System.Windows.Forms.Label deleteNoteLabel;
         
 
 
