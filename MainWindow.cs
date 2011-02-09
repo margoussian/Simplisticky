@@ -42,6 +42,8 @@ namespace Simplisticky {
             }
         }
 
+        // Implement new invisible form to handle global hotkeys
+
         private void registerGlobalKeyboardShortcuts() {
             hk = new Hotkey();
             hk.KeyCode = Keys.S;
