@@ -214,7 +214,7 @@
             // DeleteDialog
             // 
             this.DeleteDialog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeleteDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(182)))));
+            this.DeleteDialog.BackColor = System.Drawing.Color.Transparent;
             this.DeleteDialog.Controls.Add(this.slash);
             this.DeleteDialog.Controls.Add(this.confirmDelete);
             this.DeleteDialog.Controls.Add(this.cancelDelete);
@@ -230,6 +230,7 @@
             // slash
             // 
             this.slash.AutoSize = true;
+            this.slash.BackColor = System.Drawing.Color.Transparent;
             this.slash.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.slash.Location = new System.Drawing.Point(95, 5);
             this.slash.Name = "slash";
@@ -243,6 +244,7 @@
             // 
             this.confirmDelete.ActiveLinkColor = System.Drawing.Color.Black;
             this.confirmDelete.AutoSize = true;
+            this.confirmDelete.BackColor = System.Drawing.Color.Transparent;
             this.confirmDelete.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.confirmDelete.ForeColor = System.Drawing.Color.DimGray;
             this.confirmDelete.LinkColor = System.Drawing.Color.DimGray;
@@ -259,6 +261,7 @@
             // 
             this.cancelDelete.ActiveLinkColor = System.Drawing.Color.Black;
             this.cancelDelete.AutoSize = true;
+            this.cancelDelete.BackColor = System.Drawing.Color.Transparent;
             this.cancelDelete.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelDelete.ForeColor = System.Drawing.Color.DimGray;
             this.cancelDelete.LinkColor = System.Drawing.Color.DimGray;
@@ -274,7 +277,7 @@
             // deleteNoteLabel
             // 
             this.deleteNoteLabel.AutoSize = true;
-            this.deleteNoteLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(182)))));
+            this.deleteNoteLabel.BackColor = System.Drawing.Color.Transparent;
             this.deleteNoteLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteNoteLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.deleteNoteLabel.Location = new System.Drawing.Point(1, 5);
