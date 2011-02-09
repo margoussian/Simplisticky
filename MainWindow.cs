@@ -19,17 +19,41 @@ namespace Simplisticky {
         private SecureString secureEmail, securePassword;
         private String encryptedEmail, encryptedPassword;
 
+        private Hotkey hk;
+
         public MainWindow(int tab, bool show, ApplicationController _app) {
             InitializeComponent();
             app = _app;
             this.Location = Properties.Settings.Default.mainLocation;
+
             if (!show)
                 this.Hide();
             else {
                 this.MainWindowTabControl.SelectedTab = this.MainWindowTabControl.TabPages[tab];
                 this.Show();
             }
+            registerGlobalKeyboardShortcuts();
             cred = new SecureCredential();
+        }
+
+        private void showAllNotes() {   // Brings all notes to the foreground
+            foreach (StickyNote n in app.Notelist) {
+                n.Activate();
+            }
+        }
+
+        private void registerGlobalKeyboardShortcuts() {
+            hk = new Hotkey();
+            hk.KeyCode = Keys.S;
+            hk.Shift = true;
+            hk.Alt = true;
+            hk.Control = true;
+            hk.Pressed += delegate { showAllNotes(); };
+            if (!hk.GetCanRegister(this)) {
+                Console.WriteLine("Error registering global keyboard shortcuts.");
+                //feedback to user regarding this error.
+            }
+            else { hk.Register(this); }
         }
 
         #region buttonClickEvents
