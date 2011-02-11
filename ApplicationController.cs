@@ -11,12 +11,14 @@ namespace Simplisticky {
         private XmlController xml;
         private MainWindow main;
         private Initialize init;
+        private HotkeyController hotkeys;
 
         public ApplicationController() {
             
             notelist = new List<StickyNote>();
             xml = new XmlController(this);
             init = new Initialize(this);
+            hotkeys = new HotkeyController(this);
             init.begin();
         }
 
