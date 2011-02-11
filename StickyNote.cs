@@ -21,11 +21,12 @@ namespace Simplisticky {
         private int newX, newY;
         private int newCount = 1;
         private StickyNote creator;
+        private String infoText;
         
         
         private const int CS_DROPSHADOW = 0x20000;
         private const int WS_DLGFRAME = 0x00400000;
-        DateTime current;
+        
 
         #region constructors
 
@@ -209,6 +210,10 @@ namespace Simplisticky {
 
         Point lastClick;
 
+        private void StickyNote_Activated(object sender, EventArgs e) {
+
+        }
+
    
 
         private void closeButton_Click(object sender, EventArgs e) {
@@ -229,7 +234,7 @@ namespace Simplisticky {
         }
 
         private void NoteTextBox_TextChanged(object sender, EventArgs e) {
-            current = DateTime.Now;
+//            current = DateTime.Now;
 //            this.lastUpdatedField.Text = current.ToString();
         }
 
@@ -358,6 +363,18 @@ namespace Simplisticky {
             }
             this.Hide();
         }
+
+        private void infoButton_MouseEnter(object sender, EventArgs e) {
+            infoText = "Created: " + DateTime.Now.ToString() + "\nModified: " + DateTime.Now.ToString();
+            this.infoButton.Image = global::Simplisticky.Properties.Resources.info_hover;
+            infoTooltip.Show(infoText,infoButton,25,-5);
+        }
+
+        private void infoButton_MouseLeave(object sender, EventArgs e) {
+            infoTooltip.Hide(infoButton);
+            this.infoButton.Image = global::Simplisticky.Properties.Resources.info_normal;
+        }
+
 
 
     }
