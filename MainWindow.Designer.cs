@@ -59,9 +59,12 @@
             this.MainWindowTabControl.Controls.Add(this.LoginCredentialsTab);
             this.MainWindowTabControl.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainWindowTabControl.Location = new System.Drawing.Point(12, 12);
+            this.MainWindowTabControl.Multiline = true;
             this.MainWindowTabControl.Name = "MainWindowTabControl";
+            this.MainWindowTabControl.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.MainWindowTabControl.SelectedIndex = 0;
             this.MainWindowTabControl.Size = new System.Drawing.Size(294, 412);
+            this.MainWindowTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.MainWindowTabControl.TabIndex = 0;
             // 
             // NoteListTab
@@ -180,6 +183,7 @@
             // 
             // quitButton
             // 
+            this.quitButton.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quitButton.Location = new System.Drawing.Point(231, 429);
             this.quitButton.Name = "quitButton";
             this.quitButton.Size = new System.Drawing.Size(75, 23);
@@ -190,6 +194,7 @@
             // 
             // closeToTaskbar
             // 
+            this.closeToTaskbar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.closeToTaskbar.Location = new System.Drawing.Point(149, 429);
             this.closeToTaskbar.Name = "closeToTaskbar";
             this.closeToTaskbar.Size = new System.Drawing.Size(75, 23);
@@ -236,6 +241,7 @@
             // 
             // newNoteButton
             // 
+            this.newNoteButton.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newNoteButton.Location = new System.Drawing.Point(12, 429);
             this.newNoteButton.Name = "newNoteButton";
             this.newNoteButton.Size = new System.Drawing.Size(75, 23);
