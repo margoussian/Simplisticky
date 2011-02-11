@@ -375,7 +375,18 @@ namespace Simplisticky {
             this.infoButton.Image = global::Simplisticky.Properties.Resources.info_normal;
         }
 
+        private void settingIcon_Click(object sender, EventArgs e) {
+            app.Main.Show();
+            Properties.Settings.Default.showmain = true;
+            Properties.Settings.Default.Save();
+        }
 
+        private void settingIcon_MouseEnter(object sender, EventArgs e) {
+            this.settingIcon.Image = global::Simplisticky.Properties.Resources.settings_icon_hover;
+        }
 
+        private void settingIcon_MouseLeave(object sender, EventArgs e) {
+            this.settingIcon.Image = global::Simplisticky.Properties.Resources.settings_icon_normal;
+        }
     }
 }

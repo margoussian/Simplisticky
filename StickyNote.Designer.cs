@@ -36,23 +36,24 @@
             this.sergoUIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.segioScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolBarPanel = new System.Windows.Forms.Panel();
-            this.DeleteDialog = new System.Windows.Forms.Panel();
-            this.slash = new System.Windows.Forms.Label();
-            this.confirmDelete = new System.Windows.Forms.LinkLabel();
-            this.cancelDelete = new System.Windows.Forms.LinkLabel();
-            this.deleteNoteLabel = new System.Windows.Forms.Label();
-            this.NoteTextBox = new System.Windows.Forms.RichTextBox();
-            this.infoTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.blueColor = new System.Windows.Forms.ToolStripMenuItem();
             this.greenColor = new System.Windows.Forms.ToolStripMenuItem();
             this.pinkColor = new System.Windows.Forms.ToolStripMenuItem();
             this.purpleColor = new System.Windows.Forms.ToolStripMenuItem();
             this.whiteColor = new System.Windows.Forms.ToolStripMenuItem();
             this.yellowColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolBarPanel = new System.Windows.Forms.Panel();
+            this.settingIcon = new System.Windows.Forms.Label();
+            this.DeleteDialog = new System.Windows.Forms.Panel();
+            this.slash = new System.Windows.Forms.Label();
+            this.confirmDelete = new System.Windows.Forms.LinkLabel();
+            this.cancelDelete = new System.Windows.Forms.LinkLabel();
+            this.deleteNoteLabel = new System.Windows.Forms.Label();
             this.infoButton = new System.Windows.Forms.Label();
             this.AddNoteButton = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Label();
+            this.NoteTextBox = new System.Windows.Forms.RichTextBox();
+            this.infoTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.ToolBarPanel.SuspendLayout();
             this.DeleteDialog.SuspendLayout();
@@ -150,9 +151,55 @@
             this.colorToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.colorToolStripMenuItem.Text = "Color";
             // 
+            // blueColor
+            // 
+            this.blueColor.Image = global::Simplisticky.Properties.Resources.blue_stickynote;
+            this.blueColor.Name = "blueColor";
+            this.blueColor.Size = new System.Drawing.Size(109, 22);
+            this.blueColor.Text = "Blue";
+            // 
+            // greenColor
+            // 
+            this.greenColor.Image = global::Simplisticky.Properties.Resources.green_stickynote;
+            this.greenColor.Name = "greenColor";
+            this.greenColor.Size = new System.Drawing.Size(109, 22);
+            this.greenColor.Text = "Green";
+            this.greenColor.Click += new System.EventHandler(this.colorClicked);
+            // 
+            // pinkColor
+            // 
+            this.pinkColor.Image = ((System.Drawing.Image)(resources.GetObject("pinkColor.Image")));
+            this.pinkColor.Name = "pinkColor";
+            this.pinkColor.Size = new System.Drawing.Size(109, 22);
+            this.pinkColor.Text = "Pink";
+            this.pinkColor.Click += new System.EventHandler(this.colorClicked);
+            // 
+            // purpleColor
+            // 
+            this.purpleColor.Image = global::Simplisticky.Properties.Resources.purple_stickynote;
+            this.purpleColor.Name = "purpleColor";
+            this.purpleColor.Size = new System.Drawing.Size(109, 22);
+            this.purpleColor.Text = "Purple";
+            // 
+            // whiteColor
+            // 
+            this.whiteColor.Image = ((System.Drawing.Image)(resources.GetObject("whiteColor.Image")));
+            this.whiteColor.Name = "whiteColor";
+            this.whiteColor.Size = new System.Drawing.Size(109, 22);
+            this.whiteColor.Text = "White";
+            this.whiteColor.Click += new System.EventHandler(this.colorClicked);
+            // 
+            // yellowColor
+            // 
+            this.yellowColor.Image = global::Simplisticky.Properties.Resources.yellow_stickynote;
+            this.yellowColor.Name = "yellowColor";
+            this.yellowColor.Size = new System.Drawing.Size(109, 22);
+            this.yellowColor.Text = "Yellow";
+            // 
             // ToolBarPanel
             // 
             this.ToolBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(247)))), ((int)(((byte)(182)))));
+            this.ToolBarPanel.Controls.Add(this.settingIcon);
             this.ToolBarPanel.Controls.Add(this.DeleteDialog);
             this.ToolBarPanel.Controls.Add(this.infoButton);
             this.ToolBarPanel.Controls.Add(this.AddNoteButton);
@@ -166,6 +213,22 @@
             this.ToolBarPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolBarPanel_Paint);
             this.ToolBarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolbar_mouseDown);
             this.ToolBarPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseMove);
+            // 
+            // settingIcon
+            // 
+            this.settingIcon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settingIcon.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settingIcon.ForeColor = System.Drawing.Color.DimGray;
+            this.settingIcon.Image = global::Simplisticky.Properties.Resources.settings_icon_normal;
+            this.settingIcon.Location = new System.Drawing.Point(48, 7);
+            this.settingIcon.MaximumSize = new System.Drawing.Size(16, 16);
+            this.settingIcon.MinimumSize = new System.Drawing.Size(10, 10);
+            this.settingIcon.Name = "settingIcon";
+            this.settingIcon.Size = new System.Drawing.Size(16, 16);
+            this.settingIcon.TabIndex = 7;
+            this.settingIcon.Click += new System.EventHandler(this.settingIcon_Click);
+            this.settingIcon.MouseEnter += new System.EventHandler(this.settingIcon_MouseEnter);
+            this.settingIcon.MouseLeave += new System.EventHandler(this.settingIcon_MouseLeave);
             // 
             // DeleteDialog
             // 
@@ -244,66 +307,6 @@
             this.deleteNoteLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolbar_mouseDown);
             this.deleteNoteLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseMove);
             // 
-            // NoteTextBox
-            // 
-            this.NoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.NoteTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(200)))));
-            this.NoteTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.NoteTextBox.ContextMenuStrip = this.contextMenuStrip1;
-            this.NoteTextBox.ForeColor = System.Drawing.Color.Black;
-            this.NoteTextBox.Location = new System.Drawing.Point(5, 34);
-            this.NoteTextBox.Name = "NoteTextBox";
-            this.NoteTextBox.Size = new System.Drawing.Size(190, 128);
-            this.NoteTextBox.TabIndex = 4;
-            this.NoteTextBox.Text = "";
-            // 
-            // blueColor
-            // 
-            this.blueColor.Image = global::Simplisticky.Properties.Resources.blue_stickynote;
-            this.blueColor.Name = "blueColor";
-            this.blueColor.Size = new System.Drawing.Size(109, 22);
-            this.blueColor.Text = "Blue";
-            // 
-            // greenColor
-            // 
-            this.greenColor.Image = global::Simplisticky.Properties.Resources.green_stickynote;
-            this.greenColor.Name = "greenColor";
-            this.greenColor.Size = new System.Drawing.Size(109, 22);
-            this.greenColor.Text = "Green";
-            this.greenColor.Click += new System.EventHandler(this.colorClicked);
-            // 
-            // pinkColor
-            // 
-            this.pinkColor.Image = ((System.Drawing.Image)(resources.GetObject("pinkColor.Image")));
-            this.pinkColor.Name = "pinkColor";
-            this.pinkColor.Size = new System.Drawing.Size(109, 22);
-            this.pinkColor.Text = "Pink";
-            this.pinkColor.Click += new System.EventHandler(this.colorClicked);
-            // 
-            // purpleColor
-            // 
-            this.purpleColor.Image = global::Simplisticky.Properties.Resources.purple_stickynote;
-            this.purpleColor.Name = "purpleColor";
-            this.purpleColor.Size = new System.Drawing.Size(109, 22);
-            this.purpleColor.Text = "Purple";
-            // 
-            // whiteColor
-            // 
-            this.whiteColor.Image = ((System.Drawing.Image)(resources.GetObject("whiteColor.Image")));
-            this.whiteColor.Name = "whiteColor";
-            this.whiteColor.Size = new System.Drawing.Size(109, 22);
-            this.whiteColor.Text = "White";
-            this.whiteColor.Click += new System.EventHandler(this.colorClicked);
-            // 
-            // yellowColor
-            // 
-            this.yellowColor.Image = global::Simplisticky.Properties.Resources.yellow_stickynote;
-            this.yellowColor.Name = "yellowColor";
-            this.yellowColor.Size = new System.Drawing.Size(109, 22);
-            this.yellowColor.Text = "Yellow";
-            // 
             // infoButton
             // 
             this.infoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -352,6 +355,21 @@
             this.CloseButton.MouseEnter += new System.EventHandler(this.CloseButton_MouseEnter);
             this.CloseButton.MouseLeave += new System.EventHandler(this.CloseButton_MouseLeave);
             // 
+            // NoteTextBox
+            // 
+            this.NoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.NoteTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(200)))));
+            this.NoteTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.NoteTextBox.ContextMenuStrip = this.contextMenuStrip1;
+            this.NoteTextBox.ForeColor = System.Drawing.Color.Black;
+            this.NoteTextBox.Location = new System.Drawing.Point(5, 34);
+            this.NoteTextBox.Name = "NoteTextBox";
+            this.NoteTextBox.Size = new System.Drawing.Size(190, 128);
+            this.NoteTextBox.TabIndex = 4;
+            this.NoteTextBox.Text = "";
+            // 
             // StickyNote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 23F);
@@ -366,7 +384,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MinimumSize = new System.Drawing.Size(180, 65);
+            this.MinimumSize = new System.Drawing.Size(200, 65);
             this.Name = "StickyNote";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
@@ -411,6 +429,7 @@
         private System.Windows.Forms.LinkLabel cancelDelete;
         private System.Windows.Forms.Label deleteNoteLabel;
         private System.Windows.Forms.ToolTip infoTooltip;
+        private System.Windows.Forms.Label settingIcon;
         
 
 
