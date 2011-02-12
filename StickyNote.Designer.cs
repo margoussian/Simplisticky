@@ -52,7 +52,7 @@
             this.infoButton = new System.Windows.Forms.Label();
             this.AddNoteButton = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Label();
-            this.NoteTextBox = new System.Windows.Forms.RichTextBox();
+            this.NoteTextBox = new Simplisticky.DelayTextBox();
             this.infoTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.ToolBarPanel.SuspendLayout();
@@ -213,6 +213,7 @@
             this.ToolBarPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolBarPanel_Paint);
             this.ToolBarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolbar_mouseDown);
             this.ToolBarPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseMove);
+            this.ToolBarPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.toolbar_MouseUp);
             // 
             // settingIcon
             // 
@@ -365,10 +366,11 @@
             this.NoteTextBox.ContextMenuStrip = this.contextMenuStrip1;
             this.NoteTextBox.ForeColor = System.Drawing.Color.Black;
             this.NoteTextBox.Location = new System.Drawing.Point(5, 34);
+            this.NoteTextBox.Multiline = true;
             this.NoteTextBox.Name = "NoteTextBox";
             this.NoteTextBox.Size = new System.Drawing.Size(190, 128);
             this.NoteTextBox.TabIndex = 4;
-            this.NoteTextBox.Text = "";
+            this.NoteTextBox.TextChanged += new System.EventHandler(this.NoteTextBox_TextChanged);
             // 
             // StickyNote
             // 
@@ -391,11 +393,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SimplySticky";
             this.Activated += new System.EventHandler(this.StickyNote_Activated);
+            this.ResizeEnd += new System.EventHandler(this.StickyNote_ResizeEnd);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ToolBarPanel.ResumeLayout(false);
             this.DeleteDialog.ResumeLayout(false);
             this.DeleteDialog.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -422,7 +426,7 @@
         private System.Windows.Forms.ToolStripMenuItem yellowColor;
         private System.Windows.Forms.ToolStripMenuItem segioScriptToolStripMenuItem;
         private System.Windows.Forms.Label infoButton;
-        private System.Windows.Forms.RichTextBox NoteTextBox;
+        private DelayTextBox NoteTextBox;
         private System.Windows.Forms.Panel DeleteDialog;
         private System.Windows.Forms.Label slash;
         private System.Windows.Forms.LinkLabel confirmDelete;

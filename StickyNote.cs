@@ -39,7 +39,7 @@ namespace Simplisticky {
             app = _app;
             creator = _creator;
             key = _key;
-            this.NoteTextBox.Text = _text;
+            NoteTextBox.Text = _text;
             created = _created;
             modified = _modified;
             this.Width = _width;
@@ -85,6 +85,8 @@ namespace Simplisticky {
             newCount++;
             newNote.Location = new Point(newX, newY);
             app.Notelist.Add(newNote);
+            //sync to simplenote to get key, modified, etc.
+            app.Xml.addRecord(newNote);
             newNote.Show();
         }
 
@@ -219,8 +221,6 @@ namespace Simplisticky {
         private void closeButton_Click(object sender, EventArgs e) {
             CloseButton.Hide();
             DeleteDialog.Show();
-            //ConfirmDeleteDialog confirmDelete = new ConfirmDeleteDialog(this, app);
-            //confirmDelete.Show();
         }
 
         private void CloseButton_MouseEnter(object sender, EventArgs e) {
@@ -234,13 +234,18 @@ namespace Simplisticky {
         }
 
         private void NoteTextBox_TextChanged(object sender, EventArgs e) {
-//            current = DateTime.Now;
-//            this.lastUpdatedField.Text = current.ToString();
+            if (!app.Xml.Loading) {
+                app.Xml.updateRecord(this);
+            }
         }
 
 
         private void toolbar_mouseDown(object sender, MouseEventArgs e) {
             frmDrag_MouseDown(sender, e);
+        }
+
+        private void toolbar_MouseUp(object sender, MouseEventArgs e) {
+  //          app.Xml.updateRecord(this);
         }
 
         private void toolbar_MouseMove(object sender, MouseEventArgs e) {
@@ -259,6 +264,10 @@ namespace Simplisticky {
 
         private void AddNoteButton_MouseEnter(object sender, EventArgs e) {
             this.AddNoteButton.Image = global::Simplisticky.Properties.Resources.stickynote_add_hover;
+        }
+
+        private void StickyNote_ResizeEnd(object sender, EventArgs e) {
+  //          app.Xml.updateRecord(this);
         }
 
         private void frmDrag_MouseMove(object sender, MouseEventArgs e) {
