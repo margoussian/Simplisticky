@@ -14,9 +14,8 @@ namespace Simplisticky {
         private HotkeyController hotkeys;
 
         public ApplicationController() {
-            
-            notelist = new List<StickyNote>();
             hotkeys = new HotkeyController(this);
+            notelist = new List<StickyNote>();
             xml = new XmlController(this);
             init = new Initialize(this);
             init.begin();
