@@ -14,6 +14,7 @@ namespace Simplisticky {
         private String document = "Notes.xml";
         private XmlDocument addDoc;
         private XmlDocument updateDoc;
+        private XmlDocument activeDocument;
         private XmlTextReader xmlReader;
         private XmlTextWriter xmlWriter;
         private ApplicationController app;
@@ -29,14 +30,16 @@ namespace Simplisticky {
 
             app = _app;
 
-            //try {
-            //    addDoc = new XmlDocument();
-            //    updateDoc = new XmlDocument();
-            //}
-            //catch (Exception e) {
-            //    System.Console.WriteLine("Error in Constructor: " + e.Message);
-            //    // TODO: Proper ERROR message here
-            //}
+            try {
+                activeDocument = new XmlDocument();
+                activeDocument.Load(document);
+//                addDoc = new XmlDocument();
+//                updateDoc = new XmlDocument();
+            }
+            catch (Exception e) {
+                System.Console.WriteLine("Error in Constructor: " + e.Message);
+                // TODO: Proper ERROR message here
+            }
         }
 
         public bool Loading {
@@ -59,8 +62,9 @@ namespace Simplisticky {
                     textWritter.WriteEndElement();
 
                     textWritter.Close();
-                } else {
-                    
+                }
+                else {
+
                     xmlReader = new XmlTextReader(document);
                     loading = true;
                     while (xmlReader.Read()) {
@@ -84,7 +88,7 @@ namespace Simplisticky {
                                 if (xmlReader.Name == "topleft") {
                                     String[] temp = xmlReader.ReadString().Split(new char[] { ',' });
                                     topleft = new Point(Convert.ToInt32(temp[0]), Convert.ToInt32(temp[1]));
-                                }   
+                                }
                                 if (xmlReader.Name == "width") {
                                     width = Convert.ToInt32(xmlReader.ReadString());
                                 }
@@ -106,11 +110,11 @@ namespace Simplisticky {
                                     note.Show();
                                 }
                                 break;
-                        }   
+                        }
                     }
                     loading = false;
                     xmlReader.Close();
-                    
+
                 }
             }
             catch (Exception e) {
@@ -158,7 +162,7 @@ namespace Simplisticky {
                     xmlWriter.WriteEndElement();
 
                     xmlWriter.WriteStartElement("topleft", "");
-                    xmlWriter.WriteString(Convert.ToString(note.Location.X)+","+Convert.ToString(note.Location.Y));
+                    xmlWriter.WriteString(Convert.ToString(note.Location.X) + "," + Convert.ToString(note.Location.Y));
                     xmlWriter.WriteEndElement();
 
                     xmlWriter.WriteStartElement("width", "");
@@ -190,11 +194,11 @@ namespace Simplisticky {
 
         public void addRecord(StickyNote note) {
             try {
-                addDoc = new XmlDocument();
-                addDoc.Load(document);
+                //addDoc = new XmlDocument();
+                //addDoc.Load(document);
                 //Select main node	
-                XmlElement root = addDoc.DocumentElement;
-                XmlElement new_record = addDoc.CreateElement("note");
+                XmlElement root = activeDocument.DocumentElement;
+                XmlElement new_record = activeDocument.CreateElement("note");
                 new_record.InnerXml = "<key>" + note.Key + "</key>" +
                     "<show>" + note.NoteShow + "</show>" + "<created>" + note.NoteCreated + "</created>" +
                     "<modified>" + note.Modified + "</modified>" + "<text>" + note.Content + "</text>" +
@@ -203,9 +207,9 @@ namespace Simplisticky {
                     "<font>" + Convert.ToString(note.NoteFont) + "</font>" + "<color>" + Convert.ToString(note.NoteColor) + "</color>";
 
                 root.AppendChild(new_record);
-                addDoc.PreserveWhitespace = false;
-                addDoc.Save(document);
-                addDoc = null;
+                activeDocument.PreserveWhitespace = false;
+                activeDocument.Save(document);
+                //addDoc = null;
             }
             catch (Exception e) {
                 System.Console.WriteLine("Error in Add: " + e.Message);
@@ -215,27 +219,28 @@ namespace Simplisticky {
 
         public void updateRecord(StickyNote note) {
             try {
-                updateDoc = new XmlDocument();
-                updateDoc.Load(document);
+                //updateDoc = new XmlDocument();
+                //updateDoc.Load(document);
                 XmlNode old_record;
-                XmlElement root = updateDoc.DocumentElement;
-                
+                XmlElement root = activeDocument.DocumentElement;
+
                 old_record = root.SelectSingleNode("/notelist/note[key='" + note.Key + "']");
 
-                XmlElement new_record = updateDoc.CreateElement("note");
+                XmlElement new_record = activeDocument.CreateElement("note");
                 new_record.InnerXml = "<key>" + note.Key + "</key>" +
                     "<show>" + note.NoteShow + "</show>" + "<created>" + note.NoteCreated + "</created>" +
-                    "<modified>" + note.Modified + "</modified>" + "<text>" + note.Content + "</text>" + 
+                    "<modified>" + note.Modified + "</modified>" + "<text>" + note.Content + "</text>" +
                     "<topleft>" + Convert.ToString(note.Location.X) + "," + Convert.ToString(note.Location.Y) + "</topleft>" +
                     "<width>" + Convert.ToString(note.Width) + "</width>" + "<height>" + Convert.ToString(note.Height) + "</height>" +
                     "<font>" + Convert.ToString(note.NoteFont) + "</font>" + "<color>" + Convert.ToString(note.NoteColor) + "</color>";
 
-                root.ReplaceChild(new_record, old_record);                
-                updateDoc.PreserveWhitespace = false;
-                updateDoc.Save(document);
-                updateDoc = null;
-                
-            } catch (Exception e) {
+                root.ReplaceChild(new_record, old_record);
+                activeDocument.PreserveWhitespace = false;
+                activeDocument.Save(document);
+                //activeDocument = null;
+
+            }
+            catch (Exception e) {
                 System.Console.WriteLine("Error in Update: " + e.Message);
             }
         }

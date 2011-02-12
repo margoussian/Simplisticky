@@ -56,24 +56,6 @@ namespace Simplisticky {
         private void loadLocalContent() {
             xml.Read(app.Notelist);
         }
-/*        public Initialize(TabControl _MainWindowTabControl, TextBox emailField, TextBox passwordField) {
-            //first_run = Convert.ToInt32(ConfigurationManager.AppSettings["FirstRun"]);
-            MainWindowTabControl = _MainWindowTabControl;
-            cred = new SecureCredential();
-
-            // Check config file to see if this is the first time the application is being launched.
-            // If so, select Login tab for Simplenote Credentials.
-
-            if (Properties.Settings.Default.firstrun == true) {
-                MainWindowTabControl.SelectedTab = MainWindowTabControl.TabPages[2];
-            }
-            else {
-                MainWindowTabControl.SelectedTab = MainWindowTabControl.TabPages[2]; // Change on ship
-                emailField.Text = cred.ToInsecureString(cred.DecryptString(Properties.Settings.Default.email));
-                passwordField.Text = cred.ToInsecureString(cred.DecryptString(Properties.Settings.Default.password));
-                
-            } 
-        } */
 
     }
 }

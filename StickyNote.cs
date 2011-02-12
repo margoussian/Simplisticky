@@ -245,7 +245,9 @@ namespace Simplisticky {
         }
 
         private void toolbar_MouseUp(object sender, MouseEventArgs e) {
-  //          app.Xml.updateRecord(this);
+            if (!app.Xml.Loading) {
+                app.Xml.updateRecord(this);
+            }
         }
 
         private void toolbar_MouseMove(object sender, MouseEventArgs e) {
@@ -267,7 +269,9 @@ namespace Simplisticky {
         }
 
         private void StickyNote_ResizeEnd(object sender, EventArgs e) {
-  //          app.Xml.updateRecord(this);
+            if (!app.Xml.Loading) {
+                app.Xml.updateRecord(this);
+            }
         }
 
         private void frmDrag_MouseMove(object sender, MouseEventArgs e) {

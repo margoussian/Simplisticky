@@ -36,9 +36,6 @@ namespace Simplisticky {
             cred = new SecureCredential();
         }
 
-        // Implement new invisible form to handle global hotkeys
-
-
         #region buttonClickEvents
 
         private void syncButton_Click(object sender, EventArgs e) {
@@ -137,6 +134,8 @@ namespace Simplisticky {
             }
 
         }
+
+
         // Clean up everything below this line
 
 
