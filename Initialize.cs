@@ -33,6 +33,7 @@ namespace Simplisticky {
                 if (app.Notelist.Count == 0) {  // Nothing stored in XML File
                     StickyNote note = new StickyNote(app, null);
                     app.Notelist.Add(note);
+                    app.Xml.addRecord(note);
                     note.Location = new Point(50, 50);
                     note.Show();
                 }
@@ -44,6 +45,7 @@ namespace Simplisticky {
                 if (app.Notelist.Count == 0) {  // Nothing stored in XML File
                     StickyNote note = new StickyNote(app, null);
                     app.Notelist.Add(note);
+                    app.Xml.addRecord(note);
                     note.Location = new Point(190, 210);
                     note.Show();
                 }
