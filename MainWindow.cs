@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Security;
 using System.Configuration;
+using System.Threading;
 using Sharpnote;
 
 namespace Simplisticky {
@@ -18,6 +19,8 @@ namespace Simplisticky {
         private SecureCredential cred;
         private SecureString secureEmail, securePassword;
         private String encryptedEmail, encryptedPassword;
+        private Thread syncThread;
+        delegate void SetTextCallback(bool result, Exception error);
 
         public MainWindow(int tab, bool show, ApplicationController _app) {
             InitializeComponent();
@@ -37,6 +40,19 @@ namespace Simplisticky {
 
 
         #region buttonClickEvents
+
+        private void syncButton_Click(object sender, EventArgs e) {
+            if (emailField.Text == "" || passwordField.Text == "") {
+                syncStatusMessage.ForeColor = Color.Red;
+                syncStatusMessage.Text = "Invalid email or password";
+                syncStatusMessage.Show();
+            }
+            else {
+                syncThread = new Thread(new ThreadStart(this.ThreadProcSafe));
+                syncThread.Name = "MainWindow Sync Thread";
+                syncThread.Start();
+            }
+        }
 
         private void closeToTaskbar_Click(object sender, EventArgs e) {
             Properties.Settings.Default.showmain = false;
@@ -68,20 +84,29 @@ namespace Simplisticky {
 
         #endregion
 
-        // Clean up everything below this line
+        // Simplenote API Call Methods
 
-        private void syncButton_Click(object sender, EventArgs e) {
-            if (emailField.Text == "" || passwordField.Text == "") {
-                syncStatusMessage.ForeColor = Color.Red;
-                syncStatusMessage.Text = "Invalid email or password";
-                syncStatusMessage.Show();
+        private void ThreadProcSafe() {
+            try {
+                Sharpnote.Sharpnote.Instance.Login(emailField.Text, passwordField.Text);
+                var simplenotes = Sharpnote.Sharpnote.Instance.SearchNotes<Note>();
+
+                this.processLoginResults(true, null);
+            }
+            catch (Exception error) {
+                this.processLoginResults(false, error);
+            }
+        }
+
+        // This delegate processes the results from the sync thread on the main thread
+
+        private void processLoginResults(bool result, Exception error) {
+            if (this.syncStatusMessage.InvokeRequired) {
+                SetTextCallback d = new SetTextCallback(processLoginResults);
+                this.Invoke(d, new object[] { result,error });
             }
             else {
-                try {
-                    Sharpnote.Sharpnote.Instance.Login(emailField.Text, passwordField.Text);
-                    var notes = Sharpnote.Sharpnote.Instance.SearchNotes<Note>();
-                    //XML_store storedNotes = new XML_store();
-
+                if (result) {
                     syncStatusMessage.ForeColor = Color.LimeGreen;
                     syncStatusMessage.Text = "Sync Successful";
                     syncStatusMessage.Show();
@@ -95,22 +120,8 @@ namespace Simplisticky {
                     Properties.Settings.Default.password = encryptedPassword;
                     Properties.Settings.Default.firstrun = false;
                     Properties.Settings.Default.Save();
-
-                    List<Note> notelist = notes.Item1.ToList();
-                    
-    //                    listBox1.DataSource = notelist;
-      //              listBox1.DisplayMember = "Content";
-                    Hashtable myHT = new Hashtable();
-                    
-                    foreach (Note n in notelist) {
-                        myHT.Add(n.Key, n);
-           //              StickyNote sticky = new StickyNote();
-           //             storedNotes.xmlWrite(n, sticky);
-           //             sticky.Content = n.Content;
-           //             sticky.Show();
-                    }
-             //       storedNotes.xmlRead();
-                } catch (Exception error) {
+                }
+                else {
                     System.Console.WriteLine(error.Message);
                     // Find a more elegant solution to check for error type
                     if (error.Message == "The remote server returned an error: (400) Bad Request.") {
@@ -123,13 +134,10 @@ namespace Simplisticky {
                     }
                     syncStatusMessage.Show();
                 }
-
             }
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
+        // Clean up everything below this line
 
 
 
