@@ -15,7 +15,6 @@ namespace Simplisticky {
 
         public HotkeyController(ApplicationController _app) {
             InitializeComponent();
-            this.Hide();
             app = _app;
             registerGlobalKeyboardShortcuts();
             

@@ -36,6 +36,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "HotkeyController";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.ResumeLayout(false);
 
         }
