@@ -5,16 +5,19 @@ using System.Text;
 using Sharpnote;
 using System.ComponentModel;
 using System.Xml;
+using System.Xml.Linq;
 using System.Configuration;
 using System.Drawing;
 
 namespace Simplisticky {
     public class XmlController {
         private String document = "Notes.xml";
-        private XmlDocument myxmlDocument;
+        private XmlDocument addDoc;
+        private XmlDocument updateDoc;
         private XmlTextReader xmlReader;
         private XmlTextWriter xmlWriter;
         private ApplicationController app;
+        private bool loading;
 
         private String key, created, modified, text;
         private int show, width, height, font, color;
@@ -22,34 +25,44 @@ namespace Simplisticky {
 
         private StickyNote note;
 
-
-
         public XmlController(ApplicationController _app) {
 
             app = _app;
 
-            try {
-                myxmlDocument = new XmlDocument();
+            //try {
+            //    addDoc = new XmlDocument();
+            //    updateDoc = new XmlDocument();
+            //}
+            //catch (Exception e) {
+            //    System.Console.WriteLine("Error in Constructor: " + e.Message);
+            //    // TODO: Proper ERROR message here
+            //}
+        }
 
-
+        public bool Loading {
+            get {
+                return loading;
             }
-            catch (Exception e) {
-                System.Console.WriteLine("Error in Constructor: " + e.Message);
-                // TODO: Proper ERROR message here
+            set {
+                loading = value;
             }
         }
 
-         public void Read(List<StickyNote> notelist) {
+        public void Read(List<StickyNote> notelist) {
 
             try {
                 if (!System.IO.File.Exists(document)) {
                     // create new XML file here
-                    using (System.IO.File.CreateText(document));
-                    
-                } else {
-                    myxmlDocument.Load(document);
-                    xmlReader = new XmlTextReader(document);
+                    XmlTextWriter textWritter = new XmlTextWriter(document, null);
+                    textWritter.WriteStartDocument();
+                    textWritter.WriteStartElement("notelist");
+                    textWritter.WriteEndElement();
 
+                    textWritter.Close();
+                } else {
+                    
+                    xmlReader = new XmlTextReader(document);
+                    loading = true;
                     while (xmlReader.Read()) {
                         switch (xmlReader.NodeType) {
                             case XmlNodeType.Element: // The node is an element.
@@ -95,7 +108,9 @@ namespace Simplisticky {
                                 break;
                         }   
                     }
+                    loading = false;
                     xmlReader.Close();
+                    
                 }
             }
             catch (Exception e) {
@@ -105,6 +120,14 @@ namespace Simplisticky {
 
         public void Write(List<StickyNote> notelist) {
             try {
+                if (!System.IO.File.Exists(document)) {
+                    // create new XML file here
+                    XmlTextWriter textWritter = new XmlTextWriter(document, null);
+                    textWritter.WriteStartDocument();
+                    textWritter.WriteStartElement("notelist");
+                    textWritter.WriteEndElement();
+                    textWritter.Close();
+                }
 
                 xmlWriter = new XmlTextWriter(document, null);
                 xmlWriter.WriteStartDocument();
@@ -158,11 +181,62 @@ namespace Simplisticky {
                 }
                 xmlWriter.WriteEndElement();
                 xmlWriter.WriteEndDocument();
-
                 xmlWriter.Close();
             }
             catch (Exception e) {
                 System.Console.WriteLine("ERROR in XMLWRITE: " + e.Message);
+            }
+        }
+
+        public void addRecord(StickyNote note) {
+            try {
+                addDoc = new XmlDocument();
+                addDoc.Load(document);
+                //Select main node	
+                XmlElement root = addDoc.DocumentElement;
+                XmlElement new_record = addDoc.CreateElement("note");
+                new_record.InnerXml = "<key>" + note.Key + "</key>" +
+                    "<show>" + note.NoteShow + "</show>" + "<created>" + note.NoteCreated + "</created>" +
+                    "<modified>" + note.Modified + "</modified>" + "<text>" + note.Content + "</text>" +
+                    "<topleft>" + Convert.ToString(note.Location.X) + "," + Convert.ToString(note.Location.Y) + "</topleft>" +
+                    "<width>" + Convert.ToString(note.Width) + "</width>" + "<height>" + Convert.ToString(note.Height) + "</height>" +
+                    "<font>" + Convert.ToString(note.NoteFont) + "</font>" + "<color>" + Convert.ToString(note.NoteColor) + "</color>";
+
+                root.AppendChild(new_record);
+                addDoc.PreserveWhitespace = false;
+                addDoc.Save(document);
+                addDoc = null;
+            }
+            catch (Exception e) {
+                System.Console.WriteLine("Error in Add: " + e.Message);
+            }
+
+        }
+
+        public void updateRecord(StickyNote note) {
+            try {
+                updateDoc = new XmlDocument();
+                updateDoc.Load(document);
+                XmlNode old_record;
+                XmlElement root = updateDoc.DocumentElement;
+                
+                old_record = root.SelectSingleNode("/notelist/note[key='" + note.Key + "']");
+
+                XmlElement new_record = updateDoc.CreateElement("note");
+                new_record.InnerXml = "<key>" + note.Key + "</key>" +
+                    "<show>" + note.NoteShow + "</show>" + "<created>" + note.NoteCreated + "</created>" +
+                    "<modified>" + note.Modified + "</modified>" + "<text>" + note.Content + "</text>" + 
+                    "<topleft>" + Convert.ToString(note.Location.X) + "," + Convert.ToString(note.Location.Y) + "</topleft>" +
+                    "<width>" + Convert.ToString(note.Width) + "</width>" + "<height>" + Convert.ToString(note.Height) + "</height>" +
+                    "<font>" + Convert.ToString(note.NoteFont) + "</font>" + "<color>" + Convert.ToString(note.NoteColor) + "</color>";
+
+                root.ReplaceChild(new_record, old_record);                
+                updateDoc.PreserveWhitespace = false;
+                updateDoc.Save(document);
+                updateDoc = null;
+                
+            } catch (Exception e) {
+                System.Console.WriteLine("Error in Update: " + e.Message);
             }
         }
     }
